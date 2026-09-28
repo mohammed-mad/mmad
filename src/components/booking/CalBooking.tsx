@@ -123,10 +123,21 @@ export default function CalBooking({ eventSlug, workshopName, customerName, cust
   const ariaLabel = workshopName ? `${t.booking.chooseDateTime} – ${workshopName}` : t.booking.chooseDateTime;
 
   return (
-    <div role="region" aria-label={ariaLabel} className="w-full min-w-0 overflow-hidden bg-white shadow-float">
-      {status === "loading" && <BookingSkeleton />}
+    <div role="region" aria-label={ariaLabel} className="relative w-full min-w-0 overflow-hidden bg-white shadow-float">
+      {status === "loading" && (
+        // Overlays the (still laid-out, still loading) embed below so the customer never
+        // sees an empty white block. The embed itself must keep real layout while loading —
+        // Cal.com never reports `linkReady` inside a display:none / zero-size container.
+        <div className="absolute inset-0 z-10">
+          <BookingSkeleton />
+        </div>
+      )}
       {status === "error" && <BookingError onRetry={retry} />}
-      <div className={status === "ready" ? undefined : "hidden"} aria-hidden={status !== "ready"}>
+      <div
+        className={["w-full", status === "error" ? "hidden" : ""].filter(Boolean).join(" ")}
+        style={status === "loading" ? { minHeight: 420 } : undefined}
+        aria-hidden={status !== "ready"}
+      >
         <Cal
           key={attempt}
           calLink={calLink}
