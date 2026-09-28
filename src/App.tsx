@@ -1,15 +1,22 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
 import Workshops from "@/pages/Workshops";
 import WorkshopDetails from "@/pages/WorkshopDetails";
 import Booking from "@/pages/Booking";
+import BookingSuccess from "@/pages/BookingSuccess";
 import PrivateWorkshops from "@/pages/PrivateWorkshops";
 import About from "@/pages/About";
 import GalleryPage from "@/pages/Gallery";
 import Contact from "@/pages/Contact";
 import Legal from "@/pages/Legal";
 import NotFound from "@/pages/NotFound";
+
+/** Redirects the old `/booking/:slug` links to the current `/book/:workshopSlug` route. */
+function LegacyBookingRedirect() {
+  const { slug } = useParams();
+  return <Navigate to={`/book/${slug}`} replace />;
+}
 
 export default function App() {
   return (
@@ -19,7 +26,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/workshops/:slug" element={<WorkshopDetails />} />
-          <Route path="/booking/:slug" element={<Booking />} />
+          <Route path="/book/:workshopSlug" element={<Booking />} />
+          <Route path="/booking/success" element={<BookingSuccess />} />
+          <Route path="/booking/:slug" element={<LegacyBookingRedirect />} />
           <Route path="/private-workshops" element={<PrivateWorkshops />} />
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<GalleryPage />} />
