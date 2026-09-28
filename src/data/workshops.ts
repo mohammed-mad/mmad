@@ -69,6 +69,8 @@ export const workshopSources: WorkshopSource[] = [
     cardImage: kintsugiCard,
     heroImage: heroImage,
     gallery: [kintsugiTable, kintsugiWide, gallery1],
+    calEventSlug: "kintsugi-workshop",
+    active: true,
     sessions: [session("kin-1", "2026-10-17", "14:00", "17:00", 10, 6), session("kin-2", "2026-10-24", "10:00", "13:00", 10, 9), session("kin-3", "2026-11-07", "14:00", "17:00", 10, 0)],
   },
   {
@@ -103,6 +105,8 @@ export const workshopSources: WorkshopSource[] = [
     cardImage: cyanotypeCard,
     heroImage: gallery2,
     gallery: [cyanotypeWide, gallery2, gallery5],
+    calEventSlug: "cyanotype-workshop",
+    active: true,
     sessions: [session("cya-1", "2026-10-24", "14:00", "17:00", 12, 8), session("cya-2", "2026-11-14", "14:00", "17:00", 12, 12)],
   },
   {
@@ -137,6 +141,8 @@ export const workshopSources: WorkshopSource[] = [
     cardImage: mosaicCard,
     heroImage: gallery4,
     gallery: [mosaicWide, gallery4, gallery3],
+    calEventSlug: "mosaic-workshop",
+    active: true,
     sessions: [session("mos-1", "2026-10-31", "14:00", "17:00", 8, 5), session("mos-2", "2026-11-21", "10:00", "13:00", 8, 8)],
   },
   {
@@ -171,6 +177,8 @@ export const workshopSources: WorkshopSource[] = [
     cardImage: ceramicPaintingCard,
     heroImage: gallery1,
     gallery: [gallery1, gallery3, studioImage],
+    calEventSlug: "ceramic-painting-workshop",
+    active: true,
     sessions: [session("cer-1", "2026-10-18", "11:00", "13:30", 12, 7), session("cer-2", "2026-11-08", "11:00", "13:30", 12, 12)],
   },
   {
@@ -205,6 +213,8 @@ export const workshopSources: WorkshopSource[] = [
     cardImage: potteryCard,
     heroImage: gallery3,
     gallery: [gallery3, gallery1, studioImage],
+    calEventSlug: "pottery-workshop",
+    active: true,
     sessions: [session("pot-1", "2026-11-01", "14:00", "17:00", 10, 4)],
   },
   {
@@ -239,6 +249,8 @@ export const workshopSources: WorkshopSource[] = [
     cardImage: openStudioCard,
     heroImage: gallery5,
     gallery: [gallery5, studioImage, gallery1],
+    calEventSlug: "open-studio",
+    active: true,
     sessions: [session("open-1", "2026-10-22", "18:30", "21:30", 12, 10), session("open-2", "2026-11-05", "18:30", "21:30", 12, 12)],
   },
 ];

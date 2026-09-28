@@ -36,6 +36,10 @@ export interface Workshop {
   cardImage: string;
   heroImage: string;
   gallery: string[];
+  /** Slug of the matching Cal.com event type, e.g. "kintsugi-workshop" */
+  calEventSlug: string;
+  /** False hides booking for this workshop */
+  active: boolean;
   sessions: WorkshopSession[];
 }
 
