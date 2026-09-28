@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getUpcomingSessions, getWorkshopBySlug, getWorkshops, workshopGroupLabels } from "@/data/workshops";
+import { getWorkshopBySlug, getWorkshops, workshopGroupLabels } from "@/data/workshops";
 import { testimonialSources } from "@/data/testimonials";
 import { journalSources } from "@/data/journal";
 import { faqSources } from "@/data/faq";
@@ -15,11 +15,6 @@ export const useWorkshops = () => {
 export const useWorkshop = (slug: string) => {
   const { lang } = useLanguage();
   return useMemo(() => getWorkshopBySlug(slug, lang), [slug, lang]);
-};
-
-export const useUpcomingSessions = () => {
-  const { lang } = useLanguage();
-  return useMemo(() => getUpcomingSessions(lang), [lang]);
 };
 
 export const useGroupLabel = () => {

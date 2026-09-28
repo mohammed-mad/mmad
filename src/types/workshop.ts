@@ -1,18 +1,6 @@
 export type WorkshopCategory = "Kintsugi" | "Cyanotype" | "Mosaic Art" | "Ceramic Painting" | "Pottery" | "Open Studio";
 export type WorkshopGroup = "craft" | "ceramic";
 
-export interface WorkshopSession {
-  id: string;
-  /** ISO date, e.g. "2026-10-17" */
-  date: string;
-  /** Display time range, e.g. "14:00 – 17:00" */
-  time: string;
-  startTime: string;
-  endTime: string;
-  capacity: number;
-  spotsLeft: number;
-}
-
 export interface Workshop {
   id: string;
   slug: string;
@@ -40,28 +28,6 @@ export interface Workshop {
   calEventSlug: string;
   /** False hides booking for this workshop */
   active: boolean;
-  sessions: WorkshopSession[];
-}
-
-export type BookingStatus = "draft" | "pending_payment" | "confirmed";
-
-export interface Booking {
-  id: string;
-  workshopId: string;
-  sessionId: string;
-  participants: number;
-  pricePerParticipant: number;
-  total: number;
-  status: BookingStatus;
-  customer?: BookingCustomer;
-  createdAt: string;
-}
-
-export interface BookingCustomer {
-  fullName: string;
-  email: string;
-  phone?: string;
-  notes?: string;
 }
 
 export interface Testimonial {

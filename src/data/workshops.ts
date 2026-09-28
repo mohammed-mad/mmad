@@ -18,16 +18,6 @@ import gallery3 from "@/assets/images/gallery/gallery-3.jpg";
 import gallery4 from "@/assets/images/gallery/gallery-4.jpg";
 import gallery5 from "@/assets/images/gallery/gallery-5.jpg";
 
-const session = (id: string, date: string, start: string, end: string, capacity: number, spotsLeft: number) => ({
-  id,
-  date,
-  time: `${start} – ${end}`,
-  startTime: start,
-  endTime: end,
-  capacity,
-  spotsLeft,
-});
-
 const craft = { en: "Craft workshop", fr: "Atelier d'artisanat" };
 const ceramic = { en: "Ceramic workshop", fr: "Atelier de céramique" };
 const threeHours = { en: "approx. 3 hours", fr: "env. 3 heures" };
@@ -71,7 +61,6 @@ export const workshopSources: WorkshopSource[] = [
     gallery: [kintsugiTable, kintsugiWide, gallery1],
     calEventSlug: "kintsugi-workshop",
     active: true,
-    sessions: [session("kin-1", "2026-10-17", "14:00", "17:00", 10, 6), session("kin-2", "2026-10-24", "10:00", "13:00", 10, 9), session("kin-3", "2026-11-07", "14:00", "17:00", 10, 0)],
   },
   {
     id: "ws-cyanotype",
@@ -107,7 +96,6 @@ export const workshopSources: WorkshopSource[] = [
     gallery: [cyanotypeWide, gallery2, gallery5],
     calEventSlug: "cyanotype-workshop",
     active: true,
-    sessions: [session("cya-1", "2026-10-24", "14:00", "17:00", 12, 8), session("cya-2", "2026-11-14", "14:00", "17:00", 12, 12)],
   },
   {
     id: "ws-mosaic",
@@ -143,7 +131,6 @@ export const workshopSources: WorkshopSource[] = [
     gallery: [mosaicWide, gallery4, gallery3],
     calEventSlug: "mosaic-workshop",
     active: true,
-    sessions: [session("mos-1", "2026-10-31", "14:00", "17:00", 8, 5), session("mos-2", "2026-11-21", "10:00", "13:00", 8, 8)],
   },
   {
     id: "ws-ceramic-painting",
@@ -179,7 +166,6 @@ export const workshopSources: WorkshopSource[] = [
     gallery: [gallery1, gallery3, studioImage],
     calEventSlug: "ceramic-painting-workshop",
     active: true,
-    sessions: [session("cer-1", "2026-10-18", "11:00", "13:30", 12, 7), session("cer-2", "2026-11-08", "11:00", "13:30", 12, 12)],
   },
   {
     id: "ws-pottery",
@@ -215,7 +201,6 @@ export const workshopSources: WorkshopSource[] = [
     gallery: [gallery3, gallery1, studioImage],
     calEventSlug: "pottery-workshop",
     active: true,
-    sessions: [session("pot-1", "2026-11-01", "14:00", "17:00", 10, 4)],
   },
   {
     id: "ws-open-studio",
@@ -251,7 +236,6 @@ export const workshopSources: WorkshopSource[] = [
     gallery: [gallery5, studioImage, gallery1],
     calEventSlug: "open-studio",
     active: true,
-    sessions: [session("open-1", "2026-10-22", "18:30", "21:30", 12, 10), session("open-2", "2026-11-05", "18:30", "21:30", 12, 12)],
   },
 ];
 
@@ -283,14 +267,3 @@ export const getWorkshopBySlug = (slug: string, lang: Lang): Workshop | undefine
   const source = workshopSources.find((w) => w.slug === slug);
   return source ? localizeWorkshop(source, lang) : undefined;
 };
-
-export interface UpcomingSession {
-  workshop: Workshop;
-  session: Workshop["sessions"][number];
-}
-
-/** Every session across all workshops, soonest first. */
-export const getUpcomingSessions = (lang: Lang): UpcomingSession[] =>
-  getWorkshops(lang)
-    .flatMap((workshop) => workshop.sessions.map((session) => ({ workshop, session })))
-    .sort((a, b) => `${a.session.date}${a.session.startTime}`.localeCompare(`${b.session.date}${b.session.startTime}`));

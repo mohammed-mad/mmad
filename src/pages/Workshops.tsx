@@ -8,15 +8,14 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import WorkshopCard from "@/components/ui/WorkshopCard";
 import { workshopGroups } from "@/data/workshops";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { useGroupLabel, useUpcomingSessions, useWorkshops } from "@/i18n/useLocalizedData";
-import { formatShortDate } from "@/lib/format";
+import { useGroupLabel, useWorkshops } from "@/i18n/useLocalizedData";
 import studioImage from "@/assets/images/studio/studio.jpg";
 import privateImage from "@/assets/images/gallery/gallery-1.jpg";
 
 export default function Workshops() {
-  const { t, locale } = useLanguage();
+  const { t } = useLanguage();
   const workshops = useWorkshops();
-  const upcoming = useUpcomingSessions();
+  const activeWorkshops = workshops.filter((workshop) => workshop.active);
   const groupLabel = useGroupLabel();
   const w = t.workshopsPage;
 
@@ -69,23 +68,17 @@ export default function Workshops() {
             {w.upcomingTitle}
           </SectionTitle>
           <ul className="mt-6 border-t border-green/15">
-            {upcoming.map(({ workshop, session }) => {
-              const full = session.spotsLeft === 0;
-              return (
-                <li key={session.id} className="border-b border-green/15">
-                  <Link to={`/workshops/${workshop.slug}?session=${session.id}`} className="grid grid-cols-[150px_1fr] items-center gap-4 py-4 transition hover:bg-beige-dark sm:grid-cols-[200px_1fr]">
-                    <span className="font-sans text-[15px] text-green">{formatShortDate(session.date, locale)}</span>
-                    <span className="flex flex-wrap items-center gap-2 font-sans text-[15px] font-bold text-green">
-                      {workshop.shortTitle}
-                      <span className="font-normal text-green-olive">· {session.time}</span>
-                      <span className={["rounded-pill px-[8px] py-[1px] font-sans text-[10px] font-bold uppercase", full ? "bg-tomato text-white" : "bg-orange text-ink"].join(" ")}>
-                        {full ? t.common.full : t.common.spots(session.spotsLeft)}
-                      </span>
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
+            {activeWorkshops.map((workshop) => (
+              <li key={workshop.id} className="border-b border-green/15">
+                <Link to={`/book/${workshop.slug}`} className="grid grid-cols-[150px_1fr] items-center gap-4 py-4 transition hover:bg-beige-dark sm:grid-cols-[200px_1fr]">
+                  <span className="font-sans text-[15px] font-bold text-green">{workshop.shortTitle}</span>
+                  <span className="flex flex-wrap items-center gap-2 font-sans text-[15px] text-green-olive">
+                    {workshop.duration}
+                    <span className="rounded-pill bg-orange px-[8px] py-[1px] font-sans text-[10px] font-bold uppercase text-ink">{t.booking.seeDates}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
           <p className="mt-8 text-center font-sans text-[15px] leading-[26px] text-green-olive">
             {w.newsletterNote}

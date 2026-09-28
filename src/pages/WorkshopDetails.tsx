@@ -1,13 +1,14 @@
-import { Navigate, useParams, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, useParams } from "react-router-dom";
 import { Check, Coffee, Gift, Package, Shirt, Sparkles } from "lucide-react";
 import Button from "@/components/ui/Button";
 import InfoStats from "@/components/ui/InfoStats";
 import PageHero from "@/components/ui/PageHero";
 import ScriptTitle from "@/components/ui/ScriptTitle";
-import BookingPanel from "@/components/booking/BookingPanel";
 import { useT } from "@/i18n/LanguageContext";
 import { useWorkshop } from "@/i18n/useLocalizedData";
 import { formatPrice } from "@/lib/format";
+import { track } from "@/lib/analytics";
 import makerImage from "@/assets/images/people/maker.jpg";
 
 const includeIcons = [Coffee, Package, Gift, Shirt, Sparkles];
@@ -15,9 +16,15 @@ const label = "font-sans text-[10.5px] font-bold uppercase tracking-[0.14em] tex
 
 export default function WorkshopDetails() {
   const { slug = "" } = useParams();
-  const [params] = useSearchParams();
   const t = useT();
   const workshop = useWorkshop(slug);
+  const workshopId = workshop?.id;
+
+  useEffect(() => {
+    if (!workshop) return;
+    track("workshop_viewed", { workshopId: workshop.id, workshopSlug: workshop.slug, workshopName: workshop.title });
+  }, [workshopId]);
+
   if (!workshop) return <Navigate to="/workshops" replace />;
   const d = t.detail;
 
@@ -33,7 +40,7 @@ export default function WorkshopDetails() {
             ]}
           />
           <div className="mt-6 text-center lg:text-left">
-            <Button href="#booking" arrow>
+            <Button to={`/book/${workshop.slug}`} arrow>
               {d.reserve}
             </Button>
           </div>
@@ -105,12 +112,20 @@ export default function WorkshopDetails() {
               </div>
             </dl>
           </div>
-          <div>
-            <h2 id="booking-heading" className="sr-only">
+          <div className="bg-white p-6 shadow-float lg:p-9">
+            <h2 id="booking-heading" className="font-sans text-h3 text-green">
               {t.booking.title}
             </h2>
-            <BookingPanel workshop={workshop} initialSessionId={params.get("session")} initialParticipants={Number(params.get("participants") ?? 1) || 1} />
-            <p className="mt-4 font-sans text-[13px] leading-[20px] text-white/70">{d.fullNote}</p>
+            <p className="mt-2 font-sans text-body text-green-olive">
+              {formatPrice(workshop.price)} {t.common.perPerson}
+            </p>
+            {workshop.active ? (
+              <Button to={`/book/${workshop.slug}`} arrow fullWidth className="mt-6">
+                {t.booking.bookCta}
+              </Button>
+            ) : (
+              <p className="mt-6 font-sans text-body text-green-olive">{t.booking.unavailableTitle}</p>
+            )}
           </div>
         </div>
       </section>

@@ -21,10 +21,6 @@ const en = {
     moreInformation: "More information",
     allStories: "All stories",
     send: "Send",
-    full: "Full",
-    spots: (n: number) => `${n} ${n === 1 ? "spot" : "spots"}`,
-    left: (n: number) => `${n} left`,
-    spotsLeft: (n: number) => `${n} spots left`,
     reviewsOn: (n: number) => `${n} reviews on`,
     reviewUs: "Review us on Google",
     verified: "Verified",
@@ -94,7 +90,6 @@ const en = {
     whatWillYouDo: "What will you do?",
     maxPeople: "Maximum number of people",
     included: "Included",
-    fullNote: "Is the workshop full? Send us a WhatsApp message with your phone number to join the waiting list. Dietary wishes or accessibility needs? Mention them in your message and we'll make it work.",
     hostKicker: "About the host",
     hostName: "Yasmine El Idrissi",
     hostAlt: "Portrait of the studio host smiling while working on a bowl",
@@ -102,20 +97,6 @@ const en = {
   },
   booking: {
     title: "Reserve your place",
-    chooseDate: "1. Choose a date",
-    noDates: "No date has been planned yet. You can book it as a private workshop, or sign up for the newsletter to hear about new dates first.",
-    howMany: "2. How many people?",
-    removeParticipant: "Remove a participant",
-    addParticipant: "Add a participant",
-    total: "Total",
-    selectDate: "select a date",
-    yourName: "3. Your name (optional)",
-    namePlaceholder: "So we know who's coming",
-    whatsapp: "Book via WhatsApp",
-    whatsappNote: "Opens WhatsApp with your booking details pre-filled. We confirm within a day and send a payment link.",
-    googleCalendar: "Add to Google Calendar",
-    ics: "Apple / Outlook (.ics)",
-    pageTitle: (short: string) => `Book ${short}`,
     backTo: (title: string) => `Back to ${title}`,
     heading: "Book your workshop",
     chooseDateTime: "Choose your date & time",
@@ -200,16 +181,6 @@ const en = {
     placeholder: (title: string) => `This page is a placeholder for The Third Place's ${title.toLowerCase()}. Final wording will be provided by the studio before launch.`,
   },
   notFound: { title: "Page not found", text: "The page you're looking for doesn't exist or has moved.", cta: "Back to the homepage" },
-  messages: {
-    whatsappBooking: (name: string, workshop: string, date: string, time: string, participants: number) =>
-      [
-        `Hello The Third Place!${name ? ` My name is ${name}.` : ""}`,
-        `I would like to book the ${workshop} on ${date}, ${time}, for ${participants} ${participants === 1 ? "person" : "people"}.`,
-        `Could you confirm availability and send me the payment details? Thank you!`,
-      ].join("\n"),
-    calendarDetails: (tagline: string, participants: number) =>
-      `${tagline}. ${participants} ${participants === 1 ? "participant" : "participants"}. Bring an apron if you have one – everything else is provided.`,
-  },
 };
 
 export type Translation = typeof en;
@@ -235,10 +206,6 @@ const fr: Translation = {
     moreInformation: "Plus d'informations",
     allStories: "Toutes les histoires",
     send: "Envoyer",
-    full: "Complet",
-    spots: (n) => `${n} ${n === 1 ? "place" : "places"}`,
-    left: (n) => `${n} rest.`,
-    spotsLeft: (n) => `${n} places restantes`,
     reviewsOn: (n) => `${n} avis sur`,
     reviewUs: "Laissez un avis sur Google",
     verified: "Vérifié",
@@ -308,7 +275,6 @@ const fr: Translation = {
     whatWillYouDo: "Au programme",
     maxPeople: "Nombre maximum de personnes",
     included: "Inclus",
-    fullNote: "L'atelier est complet ? Envoyez-nous un message WhatsApp avec votre numéro de téléphone pour rejoindre la liste d'attente. Régime particulier ou besoins d'accessibilité ? Précisez-le dans votre message, nous nous adaptons.",
     hostKicker: "Votre hôte",
     hostName: "Yasmine El Idrissi",
     hostAlt: "Portrait de l'hôte de l'atelier, souriante, en train de travailler un bol",
@@ -316,20 +282,6 @@ const fr: Translation = {
   },
   booking: {
     title: "Réservez votre place",
-    chooseDate: "1. Choisissez une date",
-    noDates: "Aucune date n'est encore prévue. Vous pouvez réserver cet atelier en privé, ou vous inscrire à la newsletter pour être informé(e) des nouvelles dates en premier.",
-    howMany: "2. Combien de personnes ?",
-    removeParticipant: "Retirer un participant",
-    addParticipant: "Ajouter un participant",
-    total: "Total",
-    selectDate: "choisissez une date",
-    yourName: "3. Votre nom (facultatif)",
-    namePlaceholder: "Pour savoir qui vient",
-    whatsapp: "Réserver via WhatsApp",
-    whatsappNote: "Ouvre WhatsApp avec les détails de votre réservation pré-remplis. Nous confirmons sous 24 h et envoyons un lien de paiement.",
-    googleCalendar: "Ajouter à Google Agenda",
-    ics: "Apple / Outlook (.ics)",
-    pageTitle: (short) => `Réserver ${short}`,
     backTo: (title) => `Retour à ${title}`,
     heading: "Réservez votre atelier",
     chooseDateTime: "Choisissez votre date et votre heure",
@@ -414,16 +366,6 @@ const fr: Translation = {
     placeholder: (title) => `Cette page est un espace réservé pour la ${title.toLowerCase()} de The Third Place. Le texte définitif sera fourni par l'atelier avant le lancement.`,
   },
   notFound: { title: "Page introuvable", text: "La page que vous cherchez n'existe pas ou a été déplacée.", cta: "Retour à l'accueil" },
-  messages: {
-    whatsappBooking: (name, workshop, date, time, participants) =>
-      [
-        `Bonjour The Third Place !${name ? ` Je m'appelle ${name}.` : ""}`,
-        `Je souhaite réserver : ${workshop}, le ${date} de ${time}, pour ${participants} ${participants === 1 ? "personne" : "personnes"}.`,
-        `Pouvez-vous confirmer la disponibilité et m'envoyer les modalités de paiement ? Merci !`,
-      ].join("\n"),
-    calendarDetails: (tagline, participants) =>
-      `${tagline}. ${participants} participant${participants === 1 ? "" : "s"}. Apportez un tablier si vous en avez un, tout le reste est fourni.`,
-  },
 };
 
 export const translations: Record<Lang, Translation> = { en, fr };
