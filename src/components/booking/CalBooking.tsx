@@ -17,6 +17,10 @@ export interface BookingResult {
   endTime?: string;
   /** Cal.com booking uid */
   uid?: string;
+  /** Booking status reported by Cal.com (e.g. "ACCEPTED", "PENDING") */
+  status?: string;
+  /** Whether the booking still requires payment before it is confirmed */
+  paymentRequired?: boolean;
 }
 
 interface CalBookingProps {
@@ -63,8 +67,8 @@ export default function CalBooking({ eventSlug, workshopName, customerName, cust
     };
 
     const handleBookingSuccess = (event: EmbedEvent<"bookingSuccessfulV2">) => {
-      const { title, startTime, endTime, uid } = event.detail.data;
-      onBookingSuccessRef.current?.({ title, startTime, endTime, uid });
+      const { title, startTime, endTime, uid, status, paymentRequired } = event.detail.data;
+      onBookingSuccessRef.current?.({ title, startTime, endTime, uid, status, paymentRequired });
     };
 
     const timeoutId = window.setTimeout(() => {
@@ -136,7 +140,6 @@ export default function CalBooking({ eventSlug, workshopName, customerName, cust
       <div
         className={["w-full", status === "error" ? "hidden" : ""].filter(Boolean).join(" ")}
         style={status === "loading" ? { minHeight: 420 } : undefined}
-        aria-hidden={status !== "ready"}
       >
         <Cal
           key={attempt}

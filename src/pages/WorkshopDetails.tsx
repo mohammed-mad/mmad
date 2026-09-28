@@ -39,11 +39,13 @@ export default function WorkshopDetails() {
               { label: d.people, value: String(workshop.maxParticipants) },
             ]}
           />
-          <div className="mt-6 text-center lg:text-left">
-            <Button to={`/book/${workshop.slug}`} arrow>
-              {d.reserve}
-            </Button>
-          </div>
+          {workshop.active && (
+            <div className="mt-6 text-center lg:text-left">
+              <Button to={`/book/${workshop.slug}`} arrow>
+                {d.reserve}
+              </Button>
+            </div>
+          )}
         </div>
       </PageHero>
 

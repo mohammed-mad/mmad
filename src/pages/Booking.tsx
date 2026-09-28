@@ -38,6 +38,7 @@ export default function Booking() {
   const bookable = workshop.active && bookingConfig.isConfigured;
 
   const handleBookingSuccess = (result: BookingResult) => {
+    if (result.paymentRequired) return;
     track("booking_completed", { workshopId: workshop.id, workshopSlug: workshop.slug, workshopName: workshop.title });
     const state: BookingSuccessState = {
       workshopSlug: workshop.slug,
@@ -45,6 +46,7 @@ export default function Booking() {
       startTime: result.startTime,
       endTime: result.endTime,
       uid: result.uid,
+      status: result.status,
     };
     navigate("/booking/success", { state });
   };
@@ -66,7 +68,7 @@ export default function Booking() {
           <h2 className="font-sans text-h3 text-green">{t.booking.chooseDateTime}</h2>
           <div className="mt-6">
             {bookable ? (
-              <CalBooking eventSlug={workshop.calEventSlug} workshopName={workshop.title} onBookingSuccess={handleBookingSuccess} />
+              <CalBooking key={workshop.id} eventSlug={workshop.calEventSlug} workshopName={workshop.title} onBookingSuccess={handleBookingSuccess} />
             ) : (
               <div className="bg-white p-8 text-center shadow-float">
                 <p className="font-sans text-h3 text-green">{t.booking.unavailableTitle}</p>

@@ -9,7 +9,7 @@ icons from Lucide. No UI component library.
 
 This branch (`claude/sarena-redesign`) re-implements the site on the layout,
 typography and colour system of sarenaskeuken.nl, adapted to The Third Place's
-content, and adds WhatsApp booking plus add-to-calendar links.
+content, and adds live workshop booking through Cal.com.
 
 ## Getting started
 
@@ -33,27 +33,48 @@ first visit.
 - Content (workshops, FAQ, journal posts, reviews, gallery alt text) is
   authored with `{ en, fr }` fields in `src/data/*` and resolved for the active
   language by the hooks in `src/i18n/useLocalizedData.ts`.
-- Dates, the WhatsApp message and the calendar event text follow the active
-  language as well.
+- Dates shown on the booking pages follow the active language as well.
 
 To add a language, extend the `Lang` type, add a dictionary to `translations`,
 add the language to `languages`, and add the new key to every `{ en, fr }` field.
 
-## Booking flow
+## Booking (Cal.com)
 
-There is no checkout. Each workshop page (and `/booking/:slug`) has a booking
-panel where the visitor picks a date, the number of people and optionally their
-name, then:
+Workshop booking is a live [Cal.com](https://cal.com) calendar embedded on the
+site — there is no checkout and no backend.
 
-- **Book via WhatsApp** opens `wa.me/<studio number>` with a pre-filled message
-  containing the workshop, date, time and group size. The studio confirms and
-  sends a payment link in the chat.
-- **Add to Google Calendar** opens a pre-filled Google Calendar event for the
-  chosen session (Africa/Casablanca time, studio address as location).
-- **Apple / Outlook (.ics)** downloads an iCalendar file for the same session.
+1. Copy `.env.example` to `.env.local` and set `VITE_CAL_USERNAME` to the
+   Cal.com username (or team path) that owns the workshop event types.
+2. `VITE_CAL_USERNAME` is read at build time, so it must also be set in
+   whichever environment builds the site for hosting/deployment, not just
+   locally.
+3. In Cal.com, create one event type per workshop whose URL slug matches that
+   workshop's `calEventSlug` in `src/data/workshops.ts`:
 
-The helpers live in `src/lib/booking-links.ts`; the studio's WhatsApp number,
-address and socials are in `src/data/site.ts`.
+   | Workshop | `calEventSlug` |
+   | --- | --- |
+   | Kintsugi | `kintsugi-workshop` |
+   | Cyanotype | `cyanotype-workshop` |
+   | Mosaic Art | `mosaic-workshop` |
+   | Ceramic painting | `ceramic-painting-workshop` |
+   | Hand-built pottery | `pottery-workshop` |
+   | Open studio | `open-studio` |
+
+4. Set `active: false` on a workshop in `src/data/workshops.ts` to hide its
+   booking CTA and take it out of the bookable flow.
+
+Without a configured username, every booking page shows "Booking currently
+unavailable" instead of the calendar.
+
+Never put API keys or webhook secrets in `VITE_*` variables — only the public
+Cal.com username is read from the environment (`src/config/booking.ts`).
+
+The embed and its loading/error states live in
+`src/components/booking/CalBooking.tsx`; the booking page is
+`src/pages/Booking.tsx` (route `/book/:workshopSlug`) and the confirmation
+page is `src/pages/BookingSuccess.tsx` (route `/booking/success`, reached via
+router state after a successful booking). The old `/booking/:slug` path
+redirects to `/book/:slug` for backward compatibility.
 
 ## Structure
 
@@ -63,14 +84,15 @@ src/
 ├── components/
 │   ├── layout/      Navbar, Footer, Layout
 │   ├── home/        Hero, UspStrip, WorkshopsSlider, StudioSection, Reviews, Journal
-│   ├── booking/     BookingPanel (dates, participants, WhatsApp + calendar)
+│   ├── booking/     CalBooking (Cal.com embed), BookingSummary, BookingSkeleton, BookingError
 │   └── ui/          Button, Logo, ScriptTitle, SectionTitle, Carousel, WorkshopCard,
 │                    ReviewsBlock, FaqList, ContactInfoCard, NewsletterForm, InfoStats, PageHero
+├── config/          booking.ts (Cal.com username, brand colour)
 ├── data/            workshops, site, testimonials, journal, faq, gallery
-├── lib/             booking logic, booking links, formatting
-├── pages/           Home, Workshops, WorkshopDetails, Booking, PrivateWorkshops,
+├── lib/             Cal.com link building, WhatsApp contact link, analytics, formatting
+├── pages/           Home, Workshops, WorkshopDetails, Booking, BookingSuccess, PrivateWorkshops,
 │                    About, Gallery, Contact, Legal, NotFound
-├── types/           Workshop, WorkshopSession, Booking, Testimonial, JournalPost, FaqItem
+├── types/           Workshop, Testimonial, JournalPost, FaqItem
 └── index.css        @font-face declarations, Tailwind layers, shared patterns
 ```
 
@@ -80,8 +102,10 @@ src/
 | --- | --- |
 | `/` | Homepage |
 | `/workshops` | Craft and ceramic workshop carousels, upcoming dates, private workshops |
-| `/workshops/:slug` | Workshop detail with WhatsApp booking and calendar links |
-| `/booking/:slug` | Stand-alone booking panel with contact details |
+| `/workshops/:slug` | Workshop detail, with a booking CTA into `/book/:slug` |
+| `/book/:workshopSlug` | Workshop summary next to the live Cal.com booking calendar |
+| `/booking/success` | Booking confirmation, reached via router state after a booking |
+| `/booking/:slug` | Redirects to `/book/:slug` (legacy link support) |
 | `/private-workshops` | Private / group workshop request form |
 | `/about`, `/gallery`, `/contact` | Secondary pages |
 

@@ -9,6 +9,7 @@ export interface BookingSuccessState {
   startTime?: string;
   endTime?: string;
   uid?: string;
+  status?: string;
 }
 
 const isBookingSuccessState = (value: unknown): value is BookingSuccessState => {
@@ -18,6 +19,7 @@ const isBookingSuccessState = (value: unknown): value is BookingSuccessState => 
   if (candidate.startTime !== undefined && typeof candidate.startTime !== "string") return false;
   if (candidate.endTime !== undefined && typeof candidate.endTime !== "string") return false;
   if (candidate.uid !== undefined && typeof candidate.uid !== "string") return false;
+  if (candidate.status !== undefined && typeof candidate.status !== "string") return false;
   return true;
 };
 
@@ -34,10 +36,13 @@ export default function BookingSuccess() {
   const hasEnd = hasStart && state ? isValidDate(state.endTime) : false;
   const startDate = hasStart && state ? new Date(state.startTime as string) : null;
   const endDate = hasEnd && state ? new Date(state.endTime as string) : null;
+  const isConfirmed = state ? state.status === undefined || state.status.toUpperCase() === "ACCEPTED" : false;
 
   return (
     <section className="page-container pb-20 pt-[200px] text-center">
-      <h1 className="display text-[44px] leading-[1] text-green lg:text-[56px]">{t.booking.successTitle}</h1>
+      <h1 className="display text-[44px] leading-[1] text-green lg:text-[56px]">
+        {state ? (isConfirmed ? t.booking.successTitle : t.booking.pendingTitle) : t.booking.successGenericTitle}
+      </h1>
 
       {state ? (
         <div className="mt-6">
@@ -53,7 +58,7 @@ export default function BookingSuccess() {
           <p className="mt-2 font-sans text-body text-green-olive">
             {site.name}, {site.addressLines.join(", ")}
           </p>
-          <p className="mt-4 font-sans text-body text-green-olive">{t.booking.successEmail}</p>
+          <p className="mt-4 font-sans text-body text-green-olive">{isConfirmed ? t.booking.successEmail : t.booking.pendingText}</p>
         </div>
       ) : (
         <p className="mt-6 font-sans text-body text-green-olive">{t.booking.successGeneric}</p>
