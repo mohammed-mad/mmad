@@ -1,6 +1,6 @@
 import type { Workshop } from "@/types/workshop";
 import ScriptTitle from "@/components/ui/ScriptTitle";
-import { formatPrice } from "@/lib/format";
+import { useWorkshopPrice } from "@/lib/useWorkshopPrice";
 import { site } from "@/data/site";
 import { useT } from "@/i18n/LanguageContext";
 
@@ -18,6 +18,7 @@ const ddClass = "font-sans text-[15px] text-green";
  */
 export default function BookingSummary({ workshop }: BookingSummaryProps) {
   const t = useT();
+  const price = useWorkshopPrice(workshop);
 
   return (
     <div className="w-full min-w-0 overflow-hidden bg-white shadow-card">
@@ -37,12 +38,14 @@ export default function BookingSummary({ workshop }: BookingSummaryProps) {
             <dt className={dtClass}>{t.booking.summaryDuration}</dt>
             <dd className={ddClass}>{workshop.duration}</dd>
           </div>
-          <div>
-            <dt className={dtClass}>{t.booking.summaryPrice}</dt>
-            <dd className={ddClass}>
-              {formatPrice(workshop.price)} {t.common.perPerson}
-            </dd>
-          </div>
+          {price && (
+            <div>
+              <dt className={dtClass}>{t.booking.summaryPrice}</dt>
+              <dd className={ddClass}>
+                {price} {t.common.perPerson}
+              </dd>
+            </div>
+          )}
           <div>
             <dt className={dtClass}>{t.booking.summaryLocation}</dt>
             <dd className={ddClass}>

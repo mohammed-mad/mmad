@@ -66,6 +66,22 @@ site — there is no checkout and no backend.
 Without a configured username, every booking page shows "Booking currently
 unavailable" instead of the calendar.
 
+### Prices
+
+Prices are not stored in the site. Each workshop's price and currency are read
+from its Cal.com event type through Cal.com's public API
+(`src/lib/cal-events.ts`). There are two ways to set one, checked in this
+order:
+
+1. **Payment settings**: connect a payment app to the event type and set its
+   price and currency. Customers then pay online when booking.
+2. **Description**: write the amount in dirhams anywhere in the event type's
+   description, for example `Price: 650 MAD` (`DH` also works). No payment app
+   is needed.
+
+Dirhams are shown as `650 MAD`. A workshop whose event has no price, or whose
+price cannot be loaded, is shown without a price.
+
 Never put API keys or webhook secrets in `VITE_*` variables — only the public
 Cal.com username is read from the environment (`src/config/booking.ts`).
 

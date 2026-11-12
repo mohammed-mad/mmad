@@ -15,12 +15,12 @@ export default function Journal() {
         </SectionTitle>
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {posts.map((post) => (
-            <li key={post.id}>
-              <Link to="/gallery" className="group block bg-white transition duration-300 hover:-translate-y-1 hover:shadow-card">
-                <div className="aspect-[308/232] overflow-hidden">
+            <li key={post.id} className="h-full">
+              <Link to="/gallery" className="group flex h-full flex-col bg-white transition duration-300 hover:-translate-y-1 hover:shadow-card">
+                <div className="aspect-[308/280] overflow-hidden">
                   <img src={post.image} alt={post.alt} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" loading="lazy" />
                 </div>
-                <h4 className="p-5 pb-6 font-sans text-h4 text-green">{post.title}</h4>
+                <h4 className="flex-1 p-6 pb-8 font-sans text-h4 text-green">{post.title}</h4>
               </Link>
             </li>
           ))}

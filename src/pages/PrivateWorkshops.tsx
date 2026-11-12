@@ -10,8 +10,11 @@ import { useFaq } from "@/i18n/useLocalizedData";
 import { buildWhatsAppContactUrl } from "@/lib/booking-links";
 import heroImage from "@/assets/images/gallery/gallery-1.jpg";
 
-const field = "w-full border-b border-green/25 bg-transparent py-2 font-sans text-[15px] text-green placeholder:text-green/40 focus:border-tomato focus:outline-none";
+const field =
+  "mt-2 block w-full rounded-[4px] border border-green/20 bg-white px-4 py-3 font-sans text-[16px] font-normal text-green placeholder:text-green/40 transition focus:border-tomato focus:outline-none focus:ring-2 focus:ring-tomato/20";
 const label = "block font-sans text-[14px] font-bold text-green";
+const required = <span className="text-tomato" aria-hidden="true"> *</span>;
+const today = new Date().toISOString().slice(0, 10);
 
 export default function PrivateWorkshops() {
   const t = useT();
@@ -43,24 +46,24 @@ export default function PrivateWorkshops() {
       <section id="private-form" className="page-container scroll-mt-10 pb-20">
         <div className="relative mx-auto grid max-w-[1160px] grid-cols-1 gap-8 lg:grid-cols-[300px_1fr] lg:gap-0">
           <ContactInfoCard className="relative z-10 lg:mt-12 lg:mr-[-40px] lg:self-start" />
-          <form onSubmit={(e: FormEvent) => { e.preventDefault(); setSent(true); }} className="bg-beige-dark p-8 lg:p-16 lg:pl-[120px]">
-            <h2 className="font-sans text-h3 text-green">{p.formTitle}</h2>
-            <div className="mt-6 space-y-6">
-              <label className={label}>{p.name}<input required className={field} value={form.name} onChange={update("name")} autoComplete="name" /></label>
-              <label className={label}>{p.email}<input required type="email" className={field} value={form.email} onChange={update("email")} autoComplete="email" /></label>
+          <form onSubmit={(e: FormEvent) => { e.preventDefault(); setSent(true); }} className="bg-beige-dark px-5 py-8 sm:p-8 lg:p-14 lg:pl-[104px]">
+            <h2 className="font-sans text-h2 text-green">{p.formTitle}</h2>
+            <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+              <label className={label}>{p.name}{required}<input required className={field} value={form.name} onChange={update("name")} autoComplete="name" /></label>
+              <label className={label}>{p.email}{required}<input required type="email" className={field} value={form.email} onChange={update("email")} autoComplete="email" /></label>
               <label className={label}>{p.phone}<input type="tel" className={field} value={form.phone} onChange={update("phone")} autoComplete="tel" /></label>
-              <label className={label}>{p.people}<input type="number" min={6} className={field} value={form.people} onChange={update("people")} /></label>
-              <label className={label}>{p.date}<input type="date" className={field} value={form.date} onChange={update("date")} /></label>
-              <label className={label}>{p.message}<textarea rows={4} className={field} value={form.message} onChange={update("message")} placeholder={p.messagePlaceholder} /></label>
+              <label className={label}>{p.people}<input type="number" min={6} inputMode="numeric" className={field} value={form.people} onChange={update("people")} /></label>
+              <label className={`${label} sm:col-span-2`}>{p.date}<input type="date" min={today} className={`${field} sm:max-w-[calc(50%-12px)]`} value={form.date} onChange={update("date")} /></label>
+              <label className={`${label} sm:col-span-2`}>{p.message}<textarea rows={5} className={`${field} resize-y`} value={form.message} onChange={update("message")} placeholder={p.messagePlaceholder} /></label>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button type="submit" size="sm">{t.common.send}</Button>
-              <Button href={whatsapp} target="_blank" rel="noreferrer" variant="secondary" size="sm">
-                <MessageCircle className="h-4 w-4" aria-hidden="true" /> {p.askWhatsapp}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button type="submit">{t.common.send}</Button>
+              <Button href={whatsapp} target="_blank" rel="noreferrer" variant="secondary">
+                <MessageCircle className="h-5 w-5 shrink-0" aria-hidden="true" /> {p.askWhatsapp}
               </Button>
             </div>
             {sent && (
-              <p className="mt-4 font-sans text-[15px] text-green" role="status">
+              <p className="mt-5 rounded-[4px] border border-green/15 bg-white px-4 py-3 font-sans text-[15px] text-green" role="status">
                 {t.common.formThanks}
               </p>
             )}

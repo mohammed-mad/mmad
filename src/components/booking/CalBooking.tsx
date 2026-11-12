@@ -82,11 +82,12 @@ export default function CalBooking({ eventSlug, workshopName, customerName, cust
         cal = api;
         cal("ui", {
           theme: "light",
-          hideEventTypeDetails: true,
+          // Details stay visible so the chosen date and time show beside the form.
+          hideEventTypeDetails: false,
           layout: "month_view",
           cssVarsPerTheme: {
-            light: { "cal-brand": bookingConfig.brandColor },
-            dark: { "cal-brand": bookingConfig.brandColor },
+            light: bookingConfig.calTheme,
+            dark: bookingConfig.calTheme,
           },
         });
         cal("on", { action: "linkReady", callback: handleReady });

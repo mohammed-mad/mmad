@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { Check, Coffee, Gift, Package, Shirt, Sparkles } from "lucide-react";
+import { Banknote, Check, Clock, Coffee, Gift, Package, Shirt, Sparkles, Users } from "lucide-react";
 import Button from "@/components/ui/Button";
+import BookingBackdrop from "@/components/booking/BookingBackdrop";
+import ReserveCard from "@/components/booking/ReserveCard";
 import InfoStats from "@/components/ui/InfoStats";
 import PageHero from "@/components/ui/PageHero";
 import ScriptTitle from "@/components/ui/ScriptTitle";
 import { useT } from "@/i18n/LanguageContext";
 import { useWorkshop } from "@/i18n/useLocalizedData";
-import { formatPrice } from "@/lib/format";
+import { useWorkshopPrice } from "@/lib/useWorkshopPrice";
 import { track } from "@/lib/analytics";
 import makerImage from "@/assets/images/people/maker.jpg";
 
@@ -19,6 +21,7 @@ export default function WorkshopDetails() {
   const t = useT();
   const workshop = useWorkshop(slug);
   const workshopId = workshop?.id;
+  const price = useWorkshopPrice(workshop);
 
   useEffect(() => {
     if (!workshop) return;
@@ -30,13 +33,13 @@ export default function WorkshopDetails() {
 
   return (
     <>
-      <PageHero image={workshop.heroImage} imageAlt={`${workshop.title} – ${workshop.tagline}`} kicker={workshop.kicker} title={workshop.shortTitle} intro={<p className="lg:text-[17px] lg:leading-[28px]">{workshop.intro}</p>} align="left" minHeight="min-h-[600px] lg:min-h-[818px]">
-        <div className="mt-8 w-full max-w-[560px]">
+      <PageHero image={workshop.heroImage} imageAlt={`${workshop.title} – ${workshop.tagline}`} kicker={workshop.kicker} title={workshop.shortTitle} intro={<p className="lg:text-[17px] lg:leading-[28px]">{workshop.intro}</p>} align="left" minHeight="min-h-[max(600px,100svh)]">
+        <div className="mt-8 w-full max-w-[660px]">
           <InfoStats
             stats={[
-              { label: d.price, value: formatPrice(workshop.price) },
-              { label: d.duration, value: workshop.duration },
-              { label: d.people, value: String(workshop.maxParticipants) },
+              ...(price ? [{ label: d.price, value: price, hint: t.common.perPerson, Icon: Banknote }] : []),
+              { label: d.duration, value: workshop.duration, Icon: Clock },
+              { label: d.people, value: d.upTo(workshop.maxParticipants), Icon: Users },
             ]}
           />
           {workshop.active && (
@@ -78,16 +81,19 @@ export default function WorkshopDetails() {
         </ul>
       </section>
 
-      <section id="booking" className="scroll-mt-10 bg-green py-14 lg:py-[80px]" aria-labelledby="booking-heading">
-        <div className="page-container grid grid-cols-1 gap-10 lg:grid-cols-[1fr_640px] lg:gap-16">
+      <section id="booking" className="relative scroll-mt-10 bg-green py-14 lg:py-[80px]" aria-labelledby="booking-heading">
+        <BookingBackdrop />
+        <div className="page-container relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_640px] lg:gap-16">
           <div className="text-white">
             <dl className="space-y-6">
-              <div>
-                <dt className={label}>{d.price}</dt>
-                <dd className="mt-1 font-sans text-body">
-                  {formatPrice(workshop.price)} {t.common.perPerson}
-                </dd>
-              </div>
+              {price && (
+                <div>
+                  <dt className={label}>{d.price}</dt>
+                  <dd className="mt-1 font-sans text-body">
+                    {price} {t.common.perPerson}
+                  </dd>
+                </div>
+              )}
               <div>
                 <dt className={label}>{d.duration}</dt>
                 <dd className="mt-1 font-sans text-body">{workshop.duration}</dd>
@@ -114,21 +120,7 @@ export default function WorkshopDetails() {
               </div>
             </dl>
           </div>
-          <div className="bg-white p-6 shadow-float lg:p-9">
-            <h2 id="booking-heading" className="font-sans text-h3 text-green">
-              {t.booking.title}
-            </h2>
-            <p className="mt-2 font-sans text-body text-green-olive">
-              {formatPrice(workshop.price)} {t.common.perPerson}
-            </p>
-            {workshop.active ? (
-              <Button to={`/book/${workshop.slug}`} arrow fullWidth className="mt-6">
-                {t.booking.bookCta}
-              </Button>
-            ) : (
-              <p className="mt-6 font-sans text-body text-green-olive">{t.booking.unavailableTitle}</p>
-            )}
-          </div>
+          <ReserveCard workshop={workshop} />
         </div>
       </section>
 

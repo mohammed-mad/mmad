@@ -19,8 +19,6 @@ export interface Workshop {
   duration: string;
   maxParticipants: number;
   level: string;
-  /** Price per participant in EUR */
-  price: number;
   cardImage: string;
   heroImage: string;
   gallery: string[];

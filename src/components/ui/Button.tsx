@@ -45,7 +45,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(props,
   const classes = buttonClasses({ variant, size, fullWidth, className });
   const content = (
     <>
-      <span>{children}</span>
+      <span className="inline-flex items-center gap-2">{children}</span>
       {arrow && <MoveRight className="h-5 w-5 shrink-0" strokeWidth={2.2} aria-hidden="true" />}
     </>
   );

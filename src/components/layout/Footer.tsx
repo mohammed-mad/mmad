@@ -11,7 +11,7 @@ export default function Footer() {
   const legalLinks = getLegalLinks(t);
 
   return (
-    <footer className="rough-edge-top mt-[14px] bg-green text-white">
+    <footer className="rough-edge-top bg-green text-white">
       <div className="bg-dots-light bg-dots">
         <div className="page-container pt-[96px]">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[285px_220px_218px_1fr] lg:gap-0">

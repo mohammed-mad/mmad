@@ -6,11 +6,12 @@ import heroImage from "@/assets/images/hero/hero.jpg";
 
 export default function Hero() {
   const t = useT();
+  // The header fills the screen so the next section never peeks in under the photo.
   return (
-    <header className="relative isolate min-h-[640px] overflow-hidden bg-green lg:h-[818px]">
+    <header className="relative isolate flex min-h-[max(640px,100svh)] flex-col overflow-hidden bg-green">
       <img src={heroImage} alt={t.home.heroAlt} className="absolute inset-0 h-full w-full object-cover object-[65%_center] lg:object-center" fetchPriority="high" />
       <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
-      <div className="relative flex h-full min-h-[640px] flex-col justify-end px-4 pb-16 pt-40 sm:px-6 lg:min-h-0 lg:justify-start lg:px-10 lg:pb-0 lg:pt-[182px]">
+      <div className="relative flex flex-1 flex-col justify-end px-4 pb-16 pt-40 sm:px-6 lg:justify-center lg:px-10 lg:pb-16 lg:pt-[182px]">
         <div className="flex w-full max-w-[600px] flex-col items-center text-center lg:ml-[44px]">
           <ScriptTitle as="p">{t.home.welcome}</ScriptTitle>
           <h1 className="display mt-3 text-[44px] leading-[44px] text-white sm:text-[56px] sm:leading-[56px] lg:text-[72px] lg:leading-[72px]">
