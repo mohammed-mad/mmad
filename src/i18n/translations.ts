@@ -46,7 +46,8 @@ const en = {
   home: {
     heroAlt: "Participants making ceramics at long wooden tables in the sunlit studio",
     welcome: "Welcome",
-    titleLines: ["Learn a craft with", "your hands and", "surprise yourself"],
+    // titleLines: ["Learn a craft with", "your hands and", "surprise yourself"],
+    titleLines: ["What is broken can", "become more beautiful."],
     intro: "A warm welcome to our studio in Casablanca, a place between home and work. Roll up your sleeves: we repair ceramics with gold, print with sunlight and build mosaics, tile by tile. Ready for a creative afternoon together?",
     usps: [
       { title: "Hands-on creativity", text: "Learn by making, not watching" },

@@ -27,6 +27,10 @@ export default function Hero() {
           <Button to="/workshops" arrow className="mt-8">
             {t.common.seeWorkshops}
           </Button>
+
+          <Button to="/workshops" arrow className="mt-8">
+            {t.common.seeWorkshops}
+          </Button>
         </div>
       </div>
     </header>

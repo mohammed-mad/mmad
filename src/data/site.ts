@@ -24,7 +24,7 @@ export const site = {
   tagline: "A creative workshop studio in Casablanca",
   addressLines: ["Boulevard d'Anfa 12", "20050 Casablanca, Morocco"],
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Boulevard+d'Anfa+12+Casablanca",
-  email: "hello@thethirdplace.ma",
+  email: "mohammed.mad.dev@gmail.com",
   phoneDisplay: "+212 600 000 000",
   /** International number without "+" or spaces, used for wa.me links */
   whatsappNumber: "212600000000",
