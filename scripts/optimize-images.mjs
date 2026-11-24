@@ -108,7 +108,8 @@ async function main() {
 
   const sorted = Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b)));
   await writeFile(MANIFEST, JSON.stringify(sorted, null, 2) + "\n");
-  if (processed) console.log(`images: ${processed} optimized, ${skipped} unchanged (${(savedBytes / 1024 / 1024).toFixed(1)} MB smaller in total)`);
+  const sizeNote = savedBytes >= 0 ? `${(savedBytes / 1024 / 1024).toFixed(1)} MB smaller` : `${(-savedBytes / 1024 / 1024).toFixed(1)} MB larger, small photos were upscaled`;
+  if (processed) console.log(`images: ${processed} optimized, ${skipped} unchanged (${sizeNote})`);
   else console.log(`images: all ${skipped} photos up to date`);
 }
 

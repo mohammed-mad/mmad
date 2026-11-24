@@ -17,7 +17,7 @@ export default function Workshops() {
   return (
     <>
       <PageHero
-        image={images.studioPainting}
+        image={images.gardenTable}
         imageAlt={w.heroAlt}
         kicker={w.kicker}
         title={w.title}

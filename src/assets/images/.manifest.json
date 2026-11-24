@@ -43,6 +43,22 @@
     "hash": "44de687c789653896dcb523498de15d19cfa0ef4",
     "output": "cta/kintsugi-table.jpg"
   },
+  "cyanotype/artist-with-prints.jpg": {
+    "hash": "614a4d5f1c6a2df99b0deecff986a3ac05c6e98d",
+    "output": "cyanotype/artist-with-prints.jpg"
+  },
+  "cyanotype/botanical-table.jpg": {
+    "hash": "5ffbc68ac5283dc443906690a6afafe612429428",
+    "output": "cyanotype/botanical-table.jpg"
+  },
+  "cyanotype/coating-paper.jpg": {
+    "hash": "31e99bb2445a67734aeda48dccb37ae201475013",
+    "output": "cyanotype/coating-paper.jpg"
+  },
+  "cyanotype/rinsing-prints.jpg": {
+    "hash": "51aff5e1ccb862c8d7d64cfead324eddd1f547dc",
+    "output": "cyanotype/rinsing-prints.jpg"
+  },
   "gallery/gallery-1.jpg": {
     "hash": "b1278edd80e878603dfa6c6efa84b4ea324e6ad0",
     "output": "gallery/gallery-1.jpg"

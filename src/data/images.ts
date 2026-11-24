@@ -29,6 +29,11 @@ import kintsugiGloves from "@/assets/images/kintsugi/gloves-mending.jpg?pic";
 import kintsugiTeapot from "@/assets/images/kintsugi/hands-teapot.jpg?pic";
 import kintsugiTable from "@/assets/images/kintsugi/table-overhead.jpg?pic";
 // Mosaic workshop photos
+// Cyanotype workshop photos
+import cyanotypeRinsing from "@/assets/images/cyanotype/rinsing-prints.jpg?pic";
+import cyanotypeCoating from "@/assets/images/cyanotype/coating-paper.jpg?pic";
+import cyanotypeArtist from "@/assets/images/cyanotype/artist-with-prints.jpg?pic";
+import cyanotypeBotanical from "@/assets/images/cyanotype/botanical-table.jpg?pic";
 import mosaicTilesNippers from "@/assets/images/mosaic/tiles-and-nippers.jpg?pic";
 import mosaicBaskets from "@/assets/images/mosaic/tile-baskets.jpg?pic";
 import mosaicPaper from "@/assets/images/mosaic/paper-mosaic.jpg?pic";
@@ -54,6 +59,10 @@ export const images = {
   kintsugiGloves,
   kintsugiTeapot,
   kintsugiTable,
+  cyanotypeRinsing,
+  cyanotypeCoating,
+  cyanotypeArtist,
+  cyanotypeBotanical,
   mosaicTilesNippers,
   mosaicBaskets,
   mosaicPaper,

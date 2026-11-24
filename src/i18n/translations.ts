@@ -68,7 +68,7 @@ const en = {
     journalAccent: "Kintessa",
   },
   workshopsPage: {
-    heroAlt: "Participants painting together at a long table",
+    heroAlt: "A long workshop table in a leafy courtyard garden, seen from above",
     kicker: "Open workshops",
     title: "A table, ten seats, nothing perfect.",
     intro1: "Open workshops are the Saturdays you can join alone or with a friend. Ten seats at most, in a Casablanca café, with everything provided. New dates appear here, and the newsletter tells you first. Prefer your own group? See ",
@@ -299,7 +299,7 @@ const fr: Translation = {
     journalAccent: "Kintessa",
   },
   workshopsPage: {
-    heroAlt: "Des participants peignent ensemble autour d’une longue table",
+    heroAlt: "Une longue table d’atelier dans une cour-jardin verdoyante, vue d’en haut",
     kicker: "Ateliers ouverts",
     title: "Une table, dix places, rien de parfait.",
     intro1: "Les ateliers ouverts, ce sont les samedis que vous pouvez rejoindre seul(e) ou avec un ami. Dix places au maximum, dans un café de Casablanca, tout le matériel fourni. Les nouvelles dates apparaissent ici, et la newsletter vous prévient en premier. Vous préférez votre propre groupe ? Découvrez les ",
