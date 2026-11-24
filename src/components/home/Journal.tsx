@@ -9,7 +9,7 @@ export default function Journal() {
   const t = useT();
   const posts = useJournalPosts();
   return (
-    <section className="bg-paper-dark py-16 lg:pt-[72px] lg:pb-[104px]" aria-labelledby="home-journal">
+    <section className="bg-white py-16 lg:pt-[72px] lg:pb-[104px]" aria-labelledby="home-journal">
       <div className="page-container">
         <SectionTitle as="h2" accent={t.home.journalAccent} align="center">
           {t.home.journalTitle}
@@ -17,7 +17,7 @@ export default function Journal() {
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {posts.map((post) => (
             <li key={post.id} className="h-full">
-              <Link to="/gallery" className="group flex h-full flex-col bg-white transition duration-300 hover:-translate-y-1 hover:shadow-card">
+              <Link to="/gallery" className="group flex h-full flex-col bg-paper transition duration-300 hover:-translate-y-1 hover:shadow-card">
                 <div className="aspect-[308/280] overflow-hidden">
                   <Photo picture={post.image} alt={post.alt} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" />
                 </div>
