@@ -2,7 +2,7 @@ import { type FormEvent, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { createBooking, fetchSlots, VENUE_TIME_ZONE, type CreatedBooking, type SlotsByDay } from "@/lib/cal-booking";
+import { clearSlotsCache, createBooking, fetchSlots, VENUE_TIME_ZONE, type CreatedBooking, type SlotsByDay } from "@/lib/cal-booking";
 
 interface BookingFormProps {
   eventSlug: string;
@@ -80,16 +80,21 @@ export default function BookingForm({ eventSlug, maxPeople, onBooked }: BookingF
 
   useEffect(() => {
     if (slotsByMonth[month]) return;
-    const controller = new AbortController();
+    // The request is shared through a short cache, so it is never aborted; a stale answer is just ignored.
+    let active = true;
     const from = month === firstMonth ? today : `${month}-01`;
     const to = `${month}-${String(monthCells(month).filter(Boolean).length).padStart(2, "0")}`;
     setSlotsFailed(false);
-    fetchSlots(eventSlug, from, to, controller.signal)
-      .then((result) => setSlotsByMonth((current) => ({ ...current, [month]: result })))
-      .catch((err: unknown) => {
-        if (!(err instanceof DOMException && err.name === "AbortError")) setSlotsFailed(true);
+    fetchSlots(eventSlug, from, to)
+      .then((result) => {
+        if (active) setSlotsByMonth((current) => ({ ...current, [month]: result }));
+      })
+      .catch(() => {
+        if (active) setSlotsFailed(true);
       });
-    return () => controller.abort();
+    return () => {
+      active = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventSlug, month, reload]);
 
@@ -163,6 +168,7 @@ export default function BookingForm({ eventSlug, maxPeople, onBooked }: BookingF
     } catch {
       setError(f.failed);
       setStart(null);
+      clearSlotsCache();
       setSlotsByMonth({});
       setReload((n) => n + 1);
     } finally {

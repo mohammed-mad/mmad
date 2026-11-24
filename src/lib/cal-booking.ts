@@ -18,8 +18,28 @@ export type SlotsByDay = Record<string, string[]>;
 
 const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null;
 
-/** Available start times for an event between two days (inclusive). */
-export async function fetchSlots(eventSlug: string, startDay: string, endDay: string, signal?: AbortSignal): Promise<SlotsByDay> {
+/** How long free dates are reused before asking Cal.com again. */
+const SLOTS_CACHE_MS = 2 * 60 * 1000;
+const slotsCache = new Map<string, { at: number; request: Promise<SlotsByDay> }>();
+
+/** Forget cached free dates, e.g. after a booking failed because a slot was just taken. */
+export const clearSlotsCache = () => slotsCache.clear();
+
+/**
+ * Available start times for an event between two days (inclusive). Results are
+ * reused for a couple of minutes, so revisiting a month or a booking page is instant.
+ */
+export function fetchSlots(eventSlug: string, startDay: string, endDay: string): Promise<SlotsByDay> {
+  const key = `${eventSlug}|${startDay}|${endDay}`;
+  const cached = slotsCache.get(key);
+  if (cached && Date.now() - cached.at < SLOTS_CACHE_MS) return cached.request;
+  const request = requestSlots(eventSlug, startDay, endDay);
+  slotsCache.set(key, { at: Date.now(), request });
+  request.catch(() => slotsCache.delete(key));
+  return request;
+}
+
+async function requestSlots(eventSlug: string, startDay: string, endDay: string): Promise<SlotsByDay> {
   const params = new URLSearchParams({
     username: bookingConfig.calUsername,
     eventTypeSlug: eventSlug,
@@ -29,7 +49,6 @@ export async function fetchSlots(eventSlug: string, startDay: string, endDay: st
   });
   const response = await fetch(`${bookingConfig.calApiUrl}/slots?${params.toString()}`, {
     headers: { "cal-api-version": SLOTS_API_VERSION },
-    signal,
   });
   if (!response.ok) throw new Error(`slots ${response.status}`);
   const body: unknown = await response.json();
