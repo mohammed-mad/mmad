@@ -8,10 +8,12 @@ interface LanguageSwitcherProps {
    * "pill": EN | FR pair used next to the mobile menu button.
    */
   variant?: "toggle" | "pill";
+  /** Text colour of the "toggle" variant: "light" over photos, "dark" on paper pages */
+  tone?: "light" | "dark";
   className?: string;
 }
 
-export default function LanguageSwitcher({ variant = "toggle", className = "" }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ variant = "toggle", tone = "dark", className = "" }: LanguageSwitcherProps) {
   const { lang, setLang, t } = useLanguage();
 
   if (variant === "toggle") {
@@ -23,7 +25,7 @@ export default function LanguageSwitcher({ variant = "toggle", className = "" }:
         onClick={() => setLang(other)}
         aria-label={`${t.langSwitch.label}: ${otherName}`}
         title={otherName}
-        className={["inline-flex items-center gap-2 self-stretch bg-orange px-4 font-sans text-[15px] font-bold uppercase tracking-[0.06em] text-ink transition hover:bg-orange-light", className].join(" ")}
+        className={["inline-flex items-center gap-2 px-3 py-2 font-sans text-[15px] font-bold uppercase tracking-[0.06em] transition", tone === "light" ? "text-white hover:text-sun" : "text-navy hover:text-navy-soft", className].join(" ")}
       >
         <Globe className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden="true" />
         {t.langSwitch[other]}
@@ -42,7 +44,7 @@ export default function LanguageSwitcher({ variant = "toggle", className = "" }:
             onClick={() => setLang(language.code as Lang)}
             aria-pressed={active}
             aria-label={language.label}
-            className={["rounded-pill px-[10px] py-[3px] font-sans text-[13px] font-bold uppercase tracking-[0.06em] transition", active ? "bg-green text-white" : "text-green hover:bg-beige-dark"].join(" ")}
+            className={["rounded-pill px-[10px] py-[3px] font-sans text-[13px] font-bold uppercase tracking-[0.06em] transition", active ? "bg-navy text-white" : "text-navy hover:bg-paper-dark"].join(" ")}
           >
             {t.langSwitch[language.code as Lang]}
           </button>

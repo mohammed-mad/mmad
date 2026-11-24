@@ -5,48 +5,48 @@ export const faqSources: FaqItemSource[] = [
     id: "f-1",
     question: { en: "What is the difference between an open and a private workshop?", fr: "Quelle est la différence entre un atelier ouvert et un atelier privé ?" },
     answer: {
-      en: "Open workshops have a published date and you book one or more places alongside other participants. A private workshop is your own group (from 6 people) on a date we agree together, with a programme tailored to you.",
-      fr: "Les ateliers ouverts ont une date publiée et vous réservez une ou plusieurs places aux côtés d'autres participants. Un atelier privé, c'est votre propre groupe (à partir de 6 personnes) à une date convenue ensemble, avec un programme sur mesure.",
+      en: "Open workshops are public Saturdays: ten seats, you book your own and meet the others there. Private workshops are for your group alone, on a date and in a place we agree together.",
+      fr: "Les ateliers ouverts sont des samedis publics : dix places, vous réservez la vôtre et rencontrez les autres sur place. Les ateliers privés sont réservés à votre groupe, à une date et dans un lieu que nous choisissons ensemble.",
     },
   },
   {
     id: "f-2",
     question: { en: "How do I book a place?", fr: "Comment réserver une place ?" },
     answer: {
-      en: "Choose a workshop and date, tell us how many people are coming and send the pre-filled WhatsApp message. We confirm within a day and send you a payment link. You can add the session to your calendar straight away.",
-      fr: "Choisissez un atelier et une date, indiquez le nombre de personnes et envoyez le message WhatsApp pré-rempli. Nous confirmons sous 24 h et vous envoyons un lien de paiement. Vous pouvez ajouter la séance à votre agenda immédiatement.",
+      en: "Choose a date on the workshop page, pick your seat and confirm. You’ll get a message on WhatsApp or by email.",
+      fr: "Choisissez une date sur la page de l’atelier, réservez votre place et confirmez. Vous recevrez un message sur WhatsApp ou par e-mail.",
     },
   },
   {
     id: "f-3",
-    question: { en: "Do I need any experience?", fr: "Faut-il de l'expérience ?" },
+    question: { en: "Do I need any experience?", fr: "Faut-il de l’expérience ?" },
     answer: {
-      en: "No. Every workshop is designed for complete beginners, and our hosts adapt to your pace. Returning makers are welcome at the open studio evenings.",
-      fr: "Non. Chaque atelier est conçu pour les grands débutants et nos hôtes s'adaptent à votre rythme. Les habitués sont les bienvenus aux soirées Atelier libre.",
+      en: "None. We show you the first gesture, then step back. Nothing here has to be perfect.",
+      fr: "Aucune. Nous vous montrons le premier geste, puis nous nous mettons en retrait. Ici, rien n’a besoin d’être parfait.",
     },
   },
   {
     id: "f-4",
     question: { en: "Are materials included in the price?", fr: "Le matériel est-il inclus dans le prix ?" },
     answer: {
-      en: "Yes. All materials, tools, firing (for ceramics) and tea and sweets are included. For kintsugi you may bring your own broken piece or choose one of ours.",
-      fr: "Oui. Tout le matériel, les outils, la cuisson (pour la céramique) ainsi que le thé et les douceurs sont inclus. Pour le kintsugi, vous pouvez apporter votre propre pièce cassée ou en choisir une chez nous.",
+      en: "Yes: materials, tools and a guide. You only bring yourself. A drink is included or extra, depending on the café.",
+      fr: "Oui : le matériel, les outils et un guide. Vous n’apportez que vous-même. Une boisson est incluse ou en supplément, selon le café.",
     },
   },
   {
     id: "f-5",
     question: { en: "Can I cancel or move my booking?", fr: "Puis-je annuler ou déplacer ma réservation ?" },
     answer: {
-      en: "You can move your booking free of charge up to 7 days before the workshop. Cancellations up to 7 days before are refunded in full; after that we can offer a voucher if we can fill your place.",
-      fr: "Vous pouvez déplacer votre réservation sans frais jusqu'à 7 jours avant l'atelier. Les annulations jusqu'à 7 jours avant sont intégralement remboursées ; au-delà, nous pouvons proposer un bon si nous parvenons à réattribuer votre place.",
+      en: "Yes, up to 48 hours before the session. After that, the seat can be passed to someone else.",
+      fr: "Oui, jusqu’à 48 heures avant la séance. Au-delà, la place peut être cédée à quelqu’un d’autre.",
     },
   },
   {
     id: "f-6",
-    question: { en: "Is the studio suitable for team events and birthdays?", fr: "L'atelier convient-il aux événements d'équipe et aux anniversaires ?" },
+    question: { en: "Do you do team events and birthdays?", fr: "Organisez-vous des événements d’équipe et des anniversaires ?" },
     answer: {
-      en: "Very much so. We regularly host teams, birthdays and family groups. Get in touch via the private workshops page and we'll put together a proposal.",
-      fr: "Tout à fait. Nous accueillons régulièrement des équipes, des anniversaires et des familles. Contactez-nous via la page des ateliers privés et nous vous préparerons une proposition.",
+      en: "Yes, that is what private workshops are for. We come to your place, to a café or to a partner venue. Tell us the date and the number of people.",
+      fr: "Oui, c’est exactement le rôle des ateliers privés. Nous venons chez vous, dans un café ou dans un lieu partenaire. Indiquez-nous la date et le nombre de personnes.",
     },
   },
 ];

@@ -1,63 +1,54 @@
-import type { Workshop, WorkshopGroup, WorkshopSource } from "@/types/workshop";
+import type { Workshop, WorkshopSource } from "@/types/workshop";
 import type { Lang } from "@/i18n/translations";
-import kintsugiCard from "@/assets/images/cards/kintsugi.jpg";
-import cyanotypeCard from "@/assets/images/cards/cyanotype.jpg";
-import mosaicCard from "@/assets/images/cards/mosaic.jpg";
-import ceramicPaintingCard from "@/assets/images/cards/ceramic-painting.jpg";
-import potteryCard from "@/assets/images/cards/pottery.jpg";
-import openStudioCard from "@/assets/images/cards/open-studio.jpg";
-import kintsugiWide from "@/assets/images/workshops/kintsugi.jpg";
-import cyanotypeWide from "@/assets/images/workshops/cyanotype.jpg";
-import mosaicWide from "@/assets/images/workshops/mosaic.jpg";
-import kintsugiTable from "@/assets/images/cta/kintsugi-table.jpg";
-import heroImage from "@/assets/images/hero/hero.jpg";
-import studioImage from "@/assets/images/studio/studio.jpg";
-import gallery1 from "@/assets/images/gallery/gallery-1.jpg";
-import gallery2 from "@/assets/images/gallery/gallery-2.jpg";
-import gallery3 from "@/assets/images/gallery/gallery-3.jpg";
-import gallery4 from "@/assets/images/gallery/gallery-4.jpg";
-import gallery5 from "@/assets/images/gallery/gallery-5.jpg";
+import { images } from "@/data/images";
 
-const craft = { en: "Craft workshop", fr: "Atelier d'artisanat" };
-const ceramic = { en: "Ceramic workshop", fr: "Atelier de céramique" };
-const threeHours = { en: "approx. 3 hours", fr: "env. 3 heures" };
-const allLevels = { en: "All levels", fr: "Tous niveaux" };
-const beginner = { en: "Beginner", fr: "Débutant" };
-const teaAndSweets = { en: "Welcome tea & sweets", fr: "Thé et douceurs de bienvenue" };
-const apron = { en: "Apron to borrow", fr: "Tablier prêté" };
+const welcome = {
+  en: "A warm welcome, and a drink depending on the café",
+  fr: "Un accueil chaleureux, et une boisson selon le café",
+};
+const apron = { en: "An apron to borrow", fr: "Un tablier prêté" };
 
 export const workshopSources: WorkshopSource[] = [
   {
     id: "ws-kintsugi",
     slug: "kintsugi",
     category: "Kintsugi",
-    group: "craft",
-    kicker: craft,
+    kicker: { en: "Mend with gold", fr: "Réparer avec l'or" },
     title: { en: "Kintsugi Workshop", fr: "Atelier Kintsugi" },
     shortTitle: { en: "Kintsugi", fr: "Kintsugi" },
-    tagline: { en: "Beauty in imperfection", fr: "La beauté de l'imperfection" },
     intro: {
-      en: "Always wanted to repair a broken bowl the Japanese way? In this workshop you learn the philosophy behind kintsugi, then roll up your sleeves and mend your own ceramic piece with golden seams in our sunlit studio.",
-      fr: "Vous avez toujours voulu réparer un bol cassé à la manière japonaise ? Dans cet atelier, vous découvrez la philosophie du kintsugi, puis vous retroussez vos manches pour réparer votre propre pièce de céramique avec des jointures dorées, dans notre atelier baigné de lumière.",
+      en: "In Japan, a cracked bowl isn’t hidden or thrown away. Its cracks are traced in gold, and the repair becomes the most beautiful part. Come and mend yours.",
+      fr: "Au Japon, un bol fêlé ne se cache pas et ne se jette pas. Ses fissures sont tracées à l’or, et la réparation devient la plus belle partie. Venez réparer le vôtre.",
+    },
+    summary: {
+      en: "Mend a broken piece of ceramic with gold, and keep it. We begin with the story, then you work at your own pace.",
+      fr: "Réparez une céramique cassée avec de l’or, et gardez-la. Nous commençons par l’histoire, puis vous travaillez à votre rythme.",
     },
     description: {
-      en: "Kintsugi is the Japanese art of repairing broken ceramics with gold, honouring the cracks as part of an object's story. We start with the history and the traditional urushi method, then work with a modern, food-safe resin technique so you can finish a piece in one afternoon. You will learn how to clean and fit the fragments, mix and apply the adhesive, dust the seams with gold powder and polish the result. Bring a broken piece that matters to you, or choose one from our shelves.",
-      fr: "Le kintsugi est l'art japonais de réparer les céramiques brisées avec de l'or, en honorant les fissures comme une partie de l'histoire de l'objet. Nous commençons par l'histoire et la méthode traditionnelle à l'urushi, puis nous travaillons avec une technique moderne à la résine alimentaire pour terminer une pièce en un après-midi. Vous apprendrez à nettoyer et assembler les fragments, à préparer et appliquer l'adhésif, à saupoudrer les jointures de poudre d'or et à polir le résultat. Apportez une pièce cassée qui compte pour vous, ou choisissez-en une sur nos étagères.",
+      en: [
+        "Kintsugi is the Japanese art of mending broken ceramics with gold, treating the crack as part of the object’s story. We begin with where it comes from, then you work on a piece of your own with lacquer or resin and gold. Mended pieces are decorative and not food safe.",
+        "You’ll clean and fit the fragments, apply the adhesive, dust the seams with gold and polish the result. Bring a broken piece that matters to you, or choose one of ours.",
+      ],
+      fr: [
+        "Le kintsugi est l’art japonais de réparer les céramiques brisées avec de l’or, en faisant de la fissure une partie de l’histoire de l’objet. Nous commençons par ses origines, puis vous travaillez sur votre propre pièce avec de la laque ou de la résine et de l’or. Les pièces réparées sont décoratives et ne conviennent pas au contact alimentaire.",
+        "Vous nettoierez et assemblerez les fragments, appliquerez l’adhésif, saupoudrerez les jointures d’or et polirez le résultat. Apportez une pièce cassée qui compte pour vous, ou choisissez l’une des nôtres.",
+      ],
     },
     whatYouWillDo: {
-      en: ["Learn the story and philosophy behind kintsugi.", "Fit, glue and fill the cracks of your own ceramic piece.", "Apply gold powder and polish the seams.", "Take your repaired piece home the same day."],
-      fr: ["Découvrir l'histoire et la philosophie du kintsugi.", "Assembler, coller et combler les fissures de votre pièce.", "Appliquer la poudre d'or et polir les jointures.", "Repartir avec votre pièce réparée le jour même."],
+      en: ["Start with the story of kintsugi", "Fit the fragments back together", "Trace each crack in gold", "Take it home the same day"],
+      fr: ["Commencer par l’histoire du kintsugi", "Rassembler les fragments", "Tracer chaque fissure à l’or", "Repartir avec votre pièce le jour même"],
     },
     includes: {
-      en: [teaAndSweets.en, "All materials and gold powder", "A ceramic piece if you don't bring your own", apron.en, "Digital care guide"],
-      fr: [teaAndSweets.fr, "Tout le matériel et la poudre d'or", "Une pièce de céramique si vous n'apportez pas la vôtre", apron.fr, "Guide d'entretien numérique"],
+      en: [welcome.en, "All materials and gold", "A ceramic piece, if you don’t bring your own", apron.en, "A short care guide"],
+      fr: [welcome.fr, "Tout le matériel et l’or", "Une pièce de céramique, si vous n’apportez pas la vôtre", apron.fr, "Un petit guide d’entretien"],
     },
-    duration: threeHours,
+    duration: { en: "approx. 2.5 hours", fr: "env. 2 h 30" },
     maxParticipants: 10,
-    level: allLevels,
-    cardImage: kintsugiCard,
-    heroImage: heroImage,
-    gallery: [kintsugiTable, kintsugiWide, gallery1],
+    // The card (home page and booking summary) keeps its photo; the workshop page uses the new set.
+    cardImage: images.kintsugiHands,
+    heroImage: images.kintsugiGoldPlates,
+    featureImage: images.kintsugiGloves,
+    gallery: [images.kintsugiTeapot, images.kintsugiTable],
     calEventSlug: "kintsugi-workshop",
     active: true,
   },
@@ -65,33 +56,41 @@ export const workshopSources: WorkshopSource[] = [
     id: "ws-cyanotype",
     slug: "cyanotype",
     category: "Cyanotype",
-    group: "craft",
-    kicker: craft,
+    kicker: { en: "Print with sun", fr: "Imprimer au soleil" },
     title: { en: "Cyanotype Workshop", fr: "Atelier Cyanotype" },
     shortTitle: { en: "Cyanotype", fr: "Cyanotype" },
-    tagline: { en: "Create with light & nature", fr: "Créer avec la lumière et la nature" },
     intro: {
-      en: "Cyanotype is one of the oldest photographic processes: deep Prussian-blue prints made with nothing but sunlight and water. Compose with leaves and flowers from our garden and go home with your own series of botanical prints.",
-      fr: "Le cyanotype est l'un des plus anciens procédés photographiques : des tirages d'un bleu de Prusse profond, réalisés uniquement avec la lumière du soleil et de l'eau. Composez avec les feuilles et les fleurs de notre jardin et repartez avec votre propre série de tirages botaniques.",
+      en: "A photograph made without a camera: leaves, lace and light on blue paper. Every print develops a little differently, which is exactly why you’ll want to keep yours.",
+      fr: "Une photographie faite sans appareil : des feuilles, de la dentelle et de la lumière sur papier bleu. Chaque tirage se révèle un peu différemment, et c’est justement pour cela que vous voudrez garder le vôtre.",
+    },
+    summary: {
+      en: "Leaves, lace and sunlight on blue paper. You compose, the sun prints, and you take your prints home.",
+      fr: "Des feuilles, de la dentelle et du soleil sur papier bleu. Vous composez, le soleil imprime, et vous repartez avec vos tirages.",
     },
     description: {
-      en: "During this workshop you learn both the chemistry and the craft of cyanotype. We coat paper and fabric with the light-sensitive solution, compose with botanicals and found objects, expose in the sun (or under our UV lamp on cloudy days) and develop the prints in water. You will also experiment with toning to shift the blue towards sepia and violet.",
-      fr: "Pendant cet atelier, vous apprenez à la fois la chimie et le geste du cyanotype. Nous enduisons papier et tissu de la solution photosensible, composons avec des végétaux et des objets trouvés, exposons au soleil (ou sous notre lampe UV les jours nuageux) et révélons les tirages dans l'eau. Vous expérimenterez aussi le virage pour faire glisser le bleu vers le sépia et le violet.",
+      en: [
+        "Cyanotype is one of the earliest photographic processes: light-sensitive paper, a few objects, the sun, then water. The image appears in deep blue and white.",
+        "You’ll arrange your composition, expose it to the sun (or a UV lamp on cloudy days), rinse it and watch it reveal itself. Edges drift and blues vary. That’s the charm.",
+      ],
+      fr: [
+        "Le cyanotype est l’un des tout premiers procédés photographiques : un papier sensible à la lumière, quelques objets, le soleil, puis l’eau. L’image apparaît en bleu profond et blanc.",
+        "Vous composerez votre image, l’exposerez au soleil (ou à une lampe UV les jours nuageux), la rincerez et la regarderez se révéler. Les contours bougent, les bleus varient. C’est tout son charme.",
+      ],
     },
     whatYouWillDo: {
-      en: ["Coat your own paper and fabric with cyanotype solution.", "Compose with fresh botanicals and translucent objects.", "Expose, develop and tone your prints.", "Leave with a set of 4–6 finished prints."],
-      fr: ["Enduire votre papier et votre tissu de solution cyanotype.", "Composer avec des végétaux frais et des objets translucides.", "Exposer, révéler et virer vos tirages.", "Repartir avec une série de 4 à 6 tirages terminés."],
+      en: ["Arrange leaves, lace and small objects", "Let the sun do the drawing", "Rinse, and watch the blue appear", "Take your prints home"],
+      fr: ["Disposer feuilles, dentelle et petits objets", "Laisser le soleil dessiner", "Rincer, et voir le bleu apparaître", "Repartir avec vos tirages"],
     },
     includes: {
-      en: [teaAndSweets.en, "Pre-coated and self-coated papers", "Botanicals from the studio garden", apron.en, "Digital guide to continue at home"],
-      fr: [teaAndSweets.fr, "Papiers pré-enduits et à enduire soi-même", "Végétaux du jardin de l'atelier", apron.fr, "Guide numérique pour continuer chez vous"],
+      en: [welcome.en, "Paper or fabric, and all materials", apron.en, "Tips for drying and framing"],
+      fr: [welcome.fr, "Papier ou tissu, et tout le matériel", apron.fr, "Des conseils pour le séchage et l’encadrement"],
     },
-    duration: threeHours,
-    maxParticipants: 12,
-    level: beginner,
-    cardImage: cyanotypeCard,
-    heroImage: gallery2,
-    gallery: [cyanotypeWide, gallery2, gallery5],
+    duration: { en: "approx. 2 hours", fr: "env. 2 heures" },
+    maxParticipants: 10,
+    cardImage: images.cyanotypeHands,
+    heroImage: images.cyanotypePrint,
+    featureImage: images.cyanotypeHands,
+    gallery: [images.cyanotypeBlue, images.heroGarden, images.gardenTable],
     calEventSlug: "cyanotype-workshop",
     active: true,
   },
@@ -99,146 +98,46 @@ export const workshopSources: WorkshopSource[] = [
     id: "ws-mosaic",
     slug: "mosaic-art",
     category: "Mosaic Art",
-    group: "craft",
-    kicker: craft,
+    kicker: { en: "Build from pieces", fr: "Construire avec des morceaux" },
     title: { en: "Mosaic Art Workshop", fr: "Atelier Mosaïque" },
     shortTitle: { en: "Mosaic Art", fr: "Mosaïque" },
-    tagline: { en: "Piece by piece", fr: "Pièce par pièce" },
     intro: {
-      en: "Inspired by Moroccan zellige and Mediterranean mosaics, this workshop introduces you to cutting, arranging and grouting ceramic and glass tesserae. Design your own pattern and build a decorative piece to take home.",
-      fr: "Inspiré du zellige marocain et des mosaïques méditerranéennes, cet atelier vous initie à la coupe, à la composition et au jointoiement de tesselles de céramique et de verre. Dessinez votre propre motif et réalisez une pièce décorative à emporter.",
+      en: "A mosaic is made of pieces that were never meant to match. Choose yours, arrange them, and let the uneven gaps make it yours.",
+      fr: "Une mosaïque est faite de morceaux qui n’étaient pas destinés à aller ensemble. Choisissez les vôtres, disposez-les, et laissez les joints irréguliers la rendre unique.",
+    },
+    summary: {
+      en: "Choose ceramic fragments, sketch a pattern and place each piece. You leave with a small mosaic of your own.",
+      fr: "Choisissez des fragments de céramique, esquissez un motif et posez chaque pièce. Vous repartez avec votre petite mosaïque.",
     },
     description: {
-      en: "We begin with a short look at the history of zellige and the geometry behind it. Then you sketch your design, learn to nip tiles safely, lay out your pattern on a wooden base and grout it. Choose between a coaster set, a trivet or a small wall piece.",
-      fr: "Nous commençons par un bref regard sur l'histoire du zellige et la géométrie qui le sous-tend. Ensuite, vous esquissez votre motif, apprenez à couper les carreaux en toute sécurité, posez votre composition sur un support en bois et la jointoyez. Choisissez entre un set de dessous-de-verre, un dessous-de-plat ou une petite pièce murale.",
+      en: [
+        "Mosaic is one of the oldest ways of turning fragments into a picture. We start with the basics, then you design a small piece of your own.",
+        "You’ll choose ceramic fragments, sketch a pattern, place each piece, then grout and finish. Bring an idea, or let the pieces suggest one.",
+      ],
+      fr: [
+        "La mosaïque est l’une des plus anciennes façons de transformer des fragments en image. Nous commençons par les bases, puis vous dessinez votre propre petite pièce.",
+        "Vous choisirez des fragments de céramique, esquisserez un motif, poserez chaque pièce, puis ferez les joints et la finition. Venez avec une idée, ou laissez les morceaux vous en souffler une.",
+      ],
     },
     whatYouWillDo: {
-      en: ["Sketch a pattern inspired by traditional zellige.", "Cut and shape ceramic and glass tesserae.", "Lay, glue and grout your mosaic.", "Take your finished piece home."],
-      fr: ["Esquisser un motif inspiré du zellige traditionnel.", "Couper et façonner des tesselles de céramique et de verre.", "Poser, coller et jointoyer votre mosaïque.", "Repartir avec votre pièce terminée."],
+      en: ["Choose fragments in colours that speak to you", "Sketch and test your pattern", "Place each piece, one by one", "Grout, finish and take it home"],
+      fr: ["Choisir des fragments aux couleurs qui vous parlent", "Esquisser et tester votre motif", "Poser chaque pièce, une à une", "Faire les joints, finir et l’emporter"],
     },
     includes: {
-      en: [teaAndSweets.en, "Tesserae in earthy tones", "Wooden base, adhesive and grout", "Safety glasses and apron", "Digital guide"],
-      fr: [teaAndSweets.fr, "Tesselles aux tons terreux", "Support en bois, colle et joint", "Lunettes de protection et tablier", "Guide numérique"],
+      en: [welcome.en, "All materials and tools", apron.en, "Tips for looking after your piece"],
+      fr: [welcome.fr, "Tout le matériel et les outils", apron.fr, "Des conseils pour entretenir votre pièce"],
     },
-    duration: threeHours,
-    maxParticipants: 8,
-    level: allLevels,
-    cardImage: mosaicCard,
-    heroImage: gallery4,
-    gallery: [mosaicWide, gallery4, gallery3],
+    duration: { en: "approx. 2.5 hours", fr: "env. 2 h 30" },
+    maxParticipants: 10,
+    // The card (home page and booking summary) keeps its photo; the workshop page uses the new set.
+    cardImage: images.mosaicTiles,
+    heroImage: images.mosaicTilesNippers,
+    featureImage: images.mosaicPaper,
+    gallery: [images.mosaicBaskets],
     calEventSlug: "mosaic-workshop",
     active: true,
   },
-  // {
-  //   id: "ws-ceramic-painting",
-  //   slug: "ceramic-painting",
-  //   category: "Ceramic Painting",
-  //   group: "ceramic",
-  //   kicker: ceramic,
-  //   title: { en: "Ceramic Painting Workshop", fr: "Atelier Peinture sur céramique" },
-  //   shortTitle: { en: "Ceramic Painting", fr: "Peinture sur céramique" },
-  //   tagline: { en: "Colour your table", fr: "Mettez de la couleur sur votre table" },
-  //   intro: {
-  //     en: "Pick a bisque-fired bowl, plate or mug from our shelves and paint it with underglaze colours and Moroccan-inspired patterns. We glaze and fire it for you, ready to collect two weeks later.",
-  //     fr: "Choisissez un bol, une assiette ou un mug biscuité sur nos étagères et peignez-le avec des engobes colorés et des motifs d'inspiration marocaine. Nous l'émaillons et le cuisons pour vous : il sera prêt deux semaines plus tard.",
-  //   },
-  //   description: {
-  //     en: "A relaxed afternoon of painting on ceramics. You learn how underglazes behave, how to plan a pattern on a curved surface and how to use brushes, sponges and sgraffito tools. Your piece is glazed and fired in our kiln after the session.",
-  //     fr: "Un après-midi détendu de peinture sur céramique. Vous apprenez comment se comportent les engobes, comment planifier un motif sur une surface courbe et comment utiliser pinceaux, éponges et outils de sgraffite. Votre pièce est émaillée et cuite dans notre four après la séance.",
-  //   },
-  //   whatYouWillDo: {
-  //     en: ["Choose a bisque-fired piece from the studio shelves.", "Learn underglaze, sgraffito and stamping techniques.", "Paint your own pattern.", "Collect your fired piece two weeks later."],
-  //     fr: ["Choisir une pièce biscuitée sur les étagères de l'atelier.", "Apprendre les techniques d'engobe, de sgraffite et de tampon.", "Peindre votre propre motif.", "Récupérer votre pièce cuite deux semaines plus tard."],
-  //   },
-  //   includes: {
-  //     en: [teaAndSweets.en, "One bisque-fired piece", "Underglazes, brushes and tools", "Glazing and firing", apron.en],
-  //     fr: [teaAndSweets.fr, "Une pièce biscuitée", "Engobes, pinceaux et outils", "Émaillage et cuisson", apron.fr],
-  //   },
-  //   duration: { en: "approx. 2.5 hours", fr: "env. 2 h 30" },
-  //   maxParticipants: 12,
-  //   level: beginner,
-  //   cardImage: ceramicPaintingCard,
-  //   heroImage: gallery1,
-  //   gallery: [gallery1, gallery3, studioImage],
-  //   calEventSlug: "ceramic-painting-workshop",
-  //   active: true,
-  // },
-  // {
-  //   id: "ws-pottery",
-  //   slug: "hand-built-pottery",
-  //   category: "Pottery",
-  //   group: "ceramic",
-  //   kicker: ceramic,
-  //   title: { en: "Hand-built Pottery Workshop", fr: "Atelier Poterie façonnée à la main" },
-  //   shortTitle: { en: "Hand-built Pottery", fr: "Poterie à la main" },
-  //   tagline: { en: "Shaped by hand", fr: "Façonné à la main" },
-  //   intro: {
-  //     en: "No wheel needed. Using pinch, coil and slab techniques you shape a small vessel from stoneware clay, then decorate it with texture and slip. We fire and glaze it for you.",
-  //     fr: "Pas besoin de tour. Avec les techniques du pincé, du colombin et de la plaque, vous façonnez un petit contenant en grès, puis vous le décorez avec des textures et de l'engobe. Nous le cuisons et l'émaillons pour vous.",
-  //   },
-  //   description: {
-  //     en: "Hand-building is the oldest way of making pottery and the most forgiving for beginners. You learn to wedge clay, build a pinch pot, add coils for height and finish the surface with stamps and slip. Pieces are dried, bisque-fired, glazed and fired again in the following weeks.",
-  //     fr: "Le modelage est la plus ancienne façon de faire de la poterie et la plus indulgente pour les débutants. Vous apprenez à battre la terre, à monter un bol pincé, à ajouter des colombins pour gagner en hauteur et à finir la surface avec des tampons et de l'engobe. Les pièces sont séchées, biscuitées, émaillées et recuites dans les semaines suivantes.",
-  //   },
-  //   whatYouWillDo: {
-  //     en: ["Wedge and prepare stoneware clay.", "Build a vessel with pinch and coil techniques.", "Decorate with texture, stamps and slip.", "Collect your glazed piece three weeks later."],
-  //     fr: ["Battre et préparer le grès.", "Monter un contenant avec les techniques du pincé et du colombin.", "Décorer avec des textures, des tampons et de l'engobe.", "Récupérer votre pièce émaillée trois semaines plus tard."],
-  //   },
-  //   includes: {
-  //     en: [teaAndSweets.en, "Stoneware clay and tools", "Two firings and glazing", apron.en, "Digital guide"],
-  //     fr: [teaAndSweets.fr, "Grès et outils", "Deux cuissons et émaillage", apron.fr, "Guide numérique"],
-  //   },
-  //   duration: threeHours,
-  //   maxParticipants: 10,
-  //   level: beginner,
-  //   cardImage: potteryCard,
-  //   heroImage: gallery3,
-  //   gallery: [gallery3, gallery1, studioImage],
-  //   calEventSlug: "pottery-workshop",
-  //   active: true,
-  // },
-  {
-    id: "ws-open-studio",
-    slug: "open-studio",
-    category: "Open Studio",
-    group: "ceramic",
-    kicker: ceramic,
-    title: { en: "Open Studio Evening", fr: "Soirée Atelier libre" },
-    shortTitle: { en: "Open Studio", fr: "Atelier libre" },
-    tagline: { en: "Make at your own pace", fr: "Créer à votre rythme" },
-    intro: {
-      en: "Already done a workshop with us? Come back for an open evening: a table, tools, clay or paint, tea and gentle guidance when you want it.",
-      fr: "Vous avez déjà suivi un atelier chez nous ? Revenez pour une soirée libre : une table, des outils, de la terre ou de la peinture, du thé et un accompagnement discret quand vous le souhaitez.",
-    },
-    description: {
-      en: "Open Studio evenings are for returning makers who want time and space to continue a project or start a new one. A studio host is on hand for questions, glazing advice and kiln bookings.",
-      fr: "Les soirées Atelier libre sont destinées aux habitués qui veulent du temps et de l'espace pour poursuivre un projet ou en commencer un nouveau. Un hôte de l'atelier est présent pour répondre aux questions, conseiller sur l'émaillage et réserver le four.",
-    },
-    whatYouWillDo: {
-      en: ["Continue a project or start something new.", "Use the studio's tools, glazes and kiln.", "Get advice from the studio host.", "Meet other makers."],
-      fr: ["Poursuivre un projet ou en commencer un nouveau.", "Utiliser les outils, les émaux et le four de l'atelier.", "Profiter des conseils de l'hôte de l'atelier.", "Rencontrer d'autres créateurs."],
-    },
-    includes: {
-      en: ["Tea & coffee", "Tools and glazes", "Kiln firing (per piece)", apron.en],
-      fr: ["Thé et café", "Outils et émaux", "Cuisson au four (par pièce)", apron.fr],
-    },
-    duration: threeHours,
-    maxParticipants: 12,
-    level: { en: "Intermediate", fr: "Intermédiaire" },
-    cardImage: openStudioCard,
-    heroImage: gallery5,
-    gallery: [gallery5, studioImage, gallery1],
-    calEventSlug: "open-studio",
-    active: true,
-  },
 ];
-
-export const workshopGroups: WorkshopGroup[] = ["craft", "ceramic"];
-
-export const workshopGroupLabels: Record<WorkshopGroup, Record<Lang, string>> = {
-  craft: { en: "Craft workshops", fr: "Ateliers d'artisanat" },
-  ceramic: { en: "Ceramic workshops", fr: "Ateliers de céramique" },
-};
 
 /** Resolve a workshop's text fields for one language. */
 export const localizeWorkshop = (source: WorkshopSource, lang: Lang): Workshop => ({
@@ -246,11 +145,10 @@ export const localizeWorkshop = (source: WorkshopSource, lang: Lang): Workshop =
   title: source.title[lang],
   shortTitle: source.shortTitle[lang],
   kicker: source.kicker[lang],
-  tagline: source.tagline[lang],
   intro: source.intro[lang],
-  description: source.description[lang],
+  summary: source.summary[lang],
   duration: source.duration[lang],
-  level: source.level[lang] as Workshop["level"],
+  description: source.description[lang],
   whatYouWillDo: source.whatYouWillDo[lang],
   includes: source.includes[lang],
 });

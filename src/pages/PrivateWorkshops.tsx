@@ -3,17 +3,16 @@ import { MessageCircle } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ContactInfoCard from "@/components/ui/ContactInfoCard";
 import FaqList from "@/components/ui/FaqList";
+import { fieldClass, labelClass } from "@/components/ui/formStyles";
 import PageHero from "@/components/ui/PageHero";
-import ReviewsBlock from "@/components/ui/ReviewsBlock";
 import { useT } from "@/i18n/LanguageContext";
 import { useFaq } from "@/i18n/useLocalizedData";
 import { buildWhatsAppContactUrl } from "@/lib/booking-links";
-import heroImage from "@/assets/images/gallery/gallery-1.jpg";
+import { images } from "@/data/images";
 
-const field =
-  "mt-2 block w-full rounded-[4px] border border-green/20 bg-white px-4 py-3 font-sans text-[16px] font-normal text-green placeholder:text-green/40 transition focus:border-tomato focus:outline-none focus:ring-2 focus:ring-tomato/20";
-const label = "block font-sans text-[14px] font-bold text-green";
-const required = <span className="text-tomato" aria-hidden="true"> *</span>;
+const field = fieldClass;
+const label = labelClass;
+const required = <span className="text-navy" aria-hidden="true"> *</span>;
 const today = new Date().toISOString().slice(0, 10);
 
 export default function PrivateWorkshops() {
@@ -27,17 +26,17 @@ export default function PrivateWorkshops() {
 
   return (
     <>
-      <PageHero image={heroImage} imageAlt={p.heroAlt} kicker={p.kicker} title={p.title} intro={<p>{p.intro}</p>}>
-        <Button href="#private-form" arrow className="mt-8">
+      <PageHero image={images.paintingCloseUp} imagePosition="object-[center_30%]" imageAlt={p.heroAlt} kicker={p.kicker} title={p.title} intro={<p>{p.intro}</p>}>
+        <Button href="#private-form" variant="yellow" arrow className="mt-8">
           {p.cta}
         </Button>
       </PageHero>
 
       <section className="page-container py-14 lg:py-20">
-        <div className="mx-auto grid max-w-[1160px] grid-cols-1 gap-8 font-sans text-[16px] leading-[26px] text-green-olive lg:grid-cols-2 lg:gap-12">
+        <div className="mx-auto grid max-w-[1160px] grid-cols-1 gap-8 font-sans text-[16px] leading-[26px] text-navy-soft lg:grid-cols-2 lg:gap-12">
           <p>{p.p1}</p>
           <p>
-            <strong className="text-green">{p.p2Strong}</strong>
+            <strong className="text-navy">{p.p2Strong}</strong>
             {p.p2}
           </p>
         </div>
@@ -46,8 +45,8 @@ export default function PrivateWorkshops() {
       <section id="private-form" className="page-container scroll-mt-10 pb-20">
         <div className="relative mx-auto grid max-w-[1160px] grid-cols-1 gap-8 lg:grid-cols-[300px_1fr] lg:gap-0">
           <ContactInfoCard className="relative z-10 lg:mt-12 lg:mr-[-40px] lg:self-start" />
-          <form onSubmit={(e: FormEvent) => { e.preventDefault(); setSent(true); }} className="bg-beige-dark px-5 py-8 sm:p-8 lg:p-14 lg:pl-[104px]">
-            <h2 className="font-sans text-h2 text-green">{p.formTitle}</h2>
+          <form onSubmit={(e: FormEvent) => { e.preventDefault(); setSent(true); }} className="bg-paper-dark px-5 py-8 sm:p-8 lg:p-14 lg:pl-[104px]">
+            <h2 className="font-sans text-h2 text-navy">{p.formTitle}</h2>
             <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <label className={label}>{p.name}{required}<input required className={field} value={form.name} onChange={update("name")} autoComplete="name" /></label>
               <label className={label}>{p.email}{required}<input required type="email" className={field} value={form.email} onChange={update("email")} autoComplete="email" /></label>
@@ -63,7 +62,7 @@ export default function PrivateWorkshops() {
               </Button>
             </div>
             {sent && (
-              <p className="mt-5 rounded-[4px] border border-green/15 bg-white px-4 py-3 font-sans text-[15px] text-green" role="status">
+              <p className="mt-5 rounded-[4px] border border-navy/15 bg-white px-4 py-3 font-sans text-[15px] text-navy" role="status">
                 {t.common.formThanks}
               </p>
             )}
@@ -71,11 +70,9 @@ export default function PrivateWorkshops() {
         </div>
       </section>
 
-      <section className="page-container pb-20" aria-label={t.home.reviewsAria}>
-        <ReviewsBlock className="mx-auto max-w-[1220px]" />
-      </section>
+      {/* Reviews stay hidden until there are real ones. */}
 
-      <section className="bg-beige-dark py-16 lg:py-24">
+      <section className="bg-paper-dark py-16 lg:py-24">
         <div className="page-container">
           <div className="mx-auto max-w-[1160px]">
             <FaqList items={faq} />

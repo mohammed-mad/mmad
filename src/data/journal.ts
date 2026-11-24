@@ -1,12 +1,9 @@
 import type { JournalPostSource } from "@/types/workshop";
-import kintsugi from "@/assets/images/workshops/kintsugi.jpg";
-import cyanotype from "@/assets/images/workshops/cyanotype.jpg";
-import mosaic from "@/assets/images/workshops/mosaic.jpg";
-import gallery3 from "@/assets/images/gallery/gallery-3.jpg";
+import { images } from "@/data/images";
 
 export const journalSources: JournalPostSource[] = [
-  { id: "j-1", slug: "caring-for-kintsugi", image: kintsugi, title: { en: "Caring for your kintsugi piece at home", fr: "Prendre soin de votre pièce kintsugi à la maison" }, alt: { en: "Repaired ceramic bowl with golden seams", fr: "Bol en céramique réparé avec des jointures dorées" } },
-  { id: "j-2", slug: "cyanotype-on-fabric", image: cyanotype, title: { en: "Cyanotype on fabric – three things to try", fr: "Cyanotype sur tissu : trois idées à essayer" }, alt: { en: "Blue botanical prints hanging to dry", fr: "Tirages botaniques bleus qui sèchent" } },
-  { id: "j-3", slug: "zellige-patterns", image: mosaic, title: { en: "Zellige patterns you can build at home", fr: "Des motifs de zellige à réaliser chez vous" }, alt: { en: "Hands assembling a circular mosaic", fr: "Des mains assemblent une mosaïque circulaire" } },
-  { id: "j-4", slug: "new-glazes", image: gallery3, title: { en: "New glazes on the studio shelves", fr: "De nouveaux émaux sur les étagères de l'atelier" }, alt: { en: "Handmade ceramics on wooden shelves", fr: "Céramiques faites main sur des étagères en bois" } },
+  { id: "j-1", slug: "caring-for-kintsugi", image: images.kintsugiBowl, title: { en: "Caring for your kintsugi piece", fr: "Prendre soin de votre pièce en kintsugi" }, alt: { en: "A ceramic plate mended with golden seams", fr: "Une assiette en céramique réparée avec des jointures dorées" } },
+  { id: "j-2", slug: "cyanotype-no-two-prints", image: images.cyanotypePrint, title: { en: "Cyanotype: why no two prints match", fr: "Cyanotype : pourquoi aucun tirage ne se ressemble" }, alt: { en: "A blue botanical cyanotype print held up in the sun", fr: "Un cyanotype botanique bleu tenu au soleil" } },
+  { id: "j-3", slug: "mosaic-three-patterns", image: images.mosaicCat, title: { en: "Mosaic at home: three patterns to try", fr: "La mosaïque chez soi : trois motifs à essayer" }, alt: { en: "A mosaic cat in blue tiles on a yellow wall", fr: "Un chat en mosaïque bleue sur un mur jaune" } },
+  { id: "j-4", slug: "crooked-tile", image: images.mosaicTiles, title: { en: "In praise of the crooked tile", fr: "Éloge de la tesselle de travers" }, alt: { en: "Hands sorting coloured mosaic tiles on a table", fr: "Des mains trient des tesselles colorées sur une table" } },
 ];

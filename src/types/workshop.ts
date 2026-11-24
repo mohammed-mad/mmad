@@ -1,27 +1,30 @@
-export type WorkshopCategory = "Kintsugi" | "Cyanotype" | "Mosaic Art" | "Ceramic Painting" | "Pottery" | "Open Studio";
-export type WorkshopGroup = "craft" | "ceramic";
+export type WorkshopCategory = "Kintsugi" | "Cyanotype" | "Mosaic Art";
 
 export interface Workshop {
   id: string;
   slug: string;
+  /** Full name, e.g. "Kintsugi Workshop" */
   title: string;
-  /** Short display title used on cards, e.g. "Kintsugi" */
+  /** Short display title used on cards and heroes, e.g. "Kintsugi" */
   shortTitle: string;
-  /** Handwritten label above the title, e.g. "Craft workshop" */
+  /** Handwritten label above the title, e.g. "Mend with gold" */
   kicker: string;
   category: WorkshopCategory;
-  group: WorkshopGroup;
-  tagline: string;
+  /** Hero text on the workshop page */
   intro: string;
-  description: string;
+  /** Short description on the booking page card */
+  summary: string;
+  /** Two intro paragraphs, shown side by side */
+  description: string[];
   whatYouWillDo: string[];
   includes: string[];
   duration: string;
   maxParticipants: number;
-  level: string;
-  cardImage: string;
-  heroImage: string;
-  gallery: string[];
+  cardImage: Picture;
+  heroImage: Picture;
+  /** Photo next to the "What will you do?" list */
+  featureImage: Picture;
+  gallery: Picture[];
   /** Slug of the matching Cal.com event type, e.g. "kintsugi-workshop" */
   calEventSlug: string;
   /** False hides booking for this workshop */
@@ -40,7 +43,7 @@ export interface Testimonial {
 
 export interface GalleryImage {
   id: string;
-  src: string;
+  src: Picture;
   alt: string;
 }
 
@@ -48,7 +51,7 @@ export interface JournalPost {
   id: string;
   slug: string;
   title: string;
-  image: string;
+  image: Picture;
   alt: string;
 }
 
@@ -59,8 +62,8 @@ export interface FaqItem {
 }
 
 /** Text fields of a workshop that exist in every language. */
-export type WorkshopTextFields = "title" | "shortTitle" | "kicker" | "tagline" | "intro" | "description" | "duration" | "level";
-export type WorkshopListFields = "whatYouWillDo" | "includes";
+export type WorkshopTextFields = "title" | "shortTitle" | "kicker" | "intro" | "summary" | "duration";
+export type WorkshopListFields = "description" | "whatYouWillDo" | "includes";
 
 export type LocalizedString = Record<"en" | "fr", string>;
 export type LocalizedList = Record<"en" | "fr", string[]>;

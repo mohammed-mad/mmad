@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { getWorkshopBySlug, getWorkshops, workshopGroupLabels } from "@/data/workshops";
+import { getWorkshopBySlug, getWorkshops } from "@/data/workshops";
 import { testimonialSources } from "@/data/testimonials";
 import { journalSources } from "@/data/journal";
 import { faqSources } from "@/data/faq";
 import { getGalleryImages } from "@/data/gallery";
-import type { FaqItem, JournalPost, Testimonial, WorkshopGroup } from "@/types/workshop";
+import type { FaqItem, JournalPost, Testimonial } from "@/types/workshop";
 
 export const useWorkshops = () => {
   const { lang } = useLanguage();
@@ -15,11 +15,6 @@ export const useWorkshops = () => {
 export const useWorkshop = (slug: string) => {
   const { lang } = useLanguage();
   return useMemo(() => getWorkshopBySlug(slug, lang), [slug, lang]);
-};
-
-export const useGroupLabel = () => {
-  const { lang } = useLanguage();
-  return (group: WorkshopGroup) => workshopGroupLabels[group][lang];
 };
 
 export const useTestimonials = (): Testimonial[] => {

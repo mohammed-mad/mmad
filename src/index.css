@@ -1,66 +1,6 @@
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('./assets/fonts/caveat-500.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Caveat';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('./assets/fonts/caveat-600.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('./assets/fonts/manrope-400.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('./assets/fonts/manrope-500.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('./assets/fonts/manrope-600.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('./assets/fonts/manrope-700.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('./assets/fonts/manrope-800.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('./assets/fonts/oswald-500.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('./assets/fonts/oswald-600.woff2') format('woff2');
-}
+/* Brand fonts (self-hosted from npm, Latin subsets load on demand) */
+@import "@fontsource-variable/literata/opsz.css";
+@import "@fontsource/homemade-apple/latin-400.css";
 
 @tailwind base;
 @tailwind components;
@@ -73,13 +13,19 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    @apply bg-beige font-sans text-body text-green-olive;
+    @apply bg-paper font-sans text-body text-navy-soft;
   }
   ::selection {
-    @apply bg-orange text-ink;
+    @apply bg-sun text-navy;
   }
   :focus-visible {
-    @apply outline-none ring-2 ring-tomato ring-offset-2 ring-offset-beige;
+    @apply outline-none ring-2 ring-navy ring-offset-2 ring-offset-paper;
+  }
+  /* Text fields get no hard outline box; each field styles its own soft focus glow */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply ring-0 ring-offset-0;
   }
 }
 
@@ -90,24 +36,29 @@
   .page-container {
     @apply mx-auto w-full max-w-content page-padding;
   }
-  /* Handwritten sub-title with the short dashes either side */
+  /* Handwritten sub-title (Homemade Apple) with short dashes either side.
+     Navy on light backgrounds; .script-title-light (yellow) only on navy or photos. */
   .script-title {
-    @apply inline-flex items-center gap-4 font-script text-script text-orange;
+    @apply inline-flex items-center gap-4 font-script text-script text-navy;
+  }
+  .script-title-light {
+    @apply text-sun;
   }
   .script-title::before,
   .script-title::after {
     content: "";
-    @apply h-[2px] w-6 bg-orange;
+    @apply h-[1.5px] w-6 bg-current;
   }
-  /* Condensed uppercase display headline */
+  /* Large Literata headline: calm serif, regular weight, sentence case */
   .display {
-    @apply font-display uppercase tracking-[0.005em];
+    @apply font-display font-normal tracking-[-0.01em];
+    font-variation-settings: "opsz" 72;
   }
   /* Short underline accent under a word in a heading */
   .underline-accent {
-    background-image: linear-gradient(to right, #F25742, #F25742);
+    background-image: linear-gradient(to right, #022264, #022264);
     background-repeat: no-repeat;
-    background-size: 100% 3px;
+    background-size: 100% 1.5px;
     background-position: 0 100%;
     padding-bottom: 4px;
   }
@@ -120,7 +71,7 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* Rough "torn" edge between beige and green sections */
+  /* Rough "torn" edge between paper and navy sections */
   .rough-edge-top {
     position: relative;
   }

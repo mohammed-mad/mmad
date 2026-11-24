@@ -10,7 +10,7 @@ export default function StarRating({ rating, size = 16, className = "" }: StarRa
   return (
     <div className={["flex items-center gap-[2px]", className].join(" ")} role="img" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }, (_, index) => (
-        <Star key={index} style={{ width: size, height: size }} className={index < rating ? "fill-orange text-orange" : "fill-beige-deeper text-beige-deeper"} strokeWidth={0} aria-hidden="true" />
+        <Star key={index} style={{ width: size, height: size }} className={index < rating ? "fill-sun text-sun" : "fill-paper-deeper text-paper-deeper"} strokeWidth={0} aria-hidden="true" />
       ))}
     </div>
   );

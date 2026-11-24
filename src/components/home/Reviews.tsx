@@ -5,7 +5,7 @@ export default function Reviews() {
   const t = useT();
   return (
     <section className="relative overflow-hidden py-16 lg:pt-[110px] lg:pb-[150px]" aria-label={t.home.reviewsAria}>
-      <svg viewBox="0 0 320 240" className="pointer-events-none absolute -bottom-6 left-0 hidden h-[240px] w-auto text-green-olive/70 lg:block" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 320 240" className="pointer-events-none absolute -bottom-6 left-0 hidden h-[240px] w-auto text-navy-soft/70 lg:block" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M14 240Q90 180 196 90" />
         <path d="M45.6 214.8Q72.2 191 48.9 154.9Q21.8 188.2 45.6 214.8Z" />
         <path d="M72.6 192.9Q92.3 219.8 127.9 201.5Q99.4 173.3 72.6 192.9Z" />

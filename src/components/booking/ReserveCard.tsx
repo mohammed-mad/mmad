@@ -15,7 +15,7 @@ const steps = [
 /** Hand-drawn underline that sits under the price. */
 function Squiggle() {
   return (
-    <svg className="mt-2 h-[10px] w-[132px] text-orange" viewBox="0 0 132 10" fill="none" aria-hidden="true">
+    <svg className="mt-2 h-[10px] w-[132px] text-navy/40" viewBox="0 0 132 10" fill="none" aria-hidden="true">
       <path d="M2 6c10-5 18 4 28 0s18-5 28-1 18 4 28 0 18-4 28-1 12 3 16 1" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
     </svg>
   );
@@ -34,26 +34,26 @@ export default function ReserveCard({ workshop }: { workshop: Workshop }) {
         <ScriptTitle as="p" dashes={false}>
           {workshop.shortTitle}
         </ScriptTitle>
-        <h2 id="booking-heading" className="font-sans text-h2 text-green">
+        <h2 id="booking-heading" className="font-sans text-h2 text-navy">
           {t.booking.title}
         </h2>
         {price && (
           <div className="mt-6">
-            <p className="flex items-baseline gap-2 text-green">
+            <p className="flex items-baseline gap-2 text-navy">
               <span className="display text-[44px] leading-none">{amount}</span>
               {unit && <span className="font-sans text-[18px] font-bold leading-none tracking-[0.04em]">{unit}</span>}
             </p>
             <Squiggle />
-            <p className="mt-2 font-sans text-[11px] font-bold uppercase tracking-[0.14em] text-green-olive">{t.common.perPerson}</p>
+            <p className="mt-2 font-sans text-[11px] font-bold uppercase tracking-[0.14em] text-navy-soft">{t.common.perPerson}</p>
           </div>
         )}
-        <hr className="mt-6 border-green/10" />
+        <hr className="mt-6 border-navy/10" />
         {workshop.active ? (
           <>
             <ol className="mt-6 space-y-3">
               {steps.map(({ Icon, key }) => (
-                <li key={key} className="flex items-center gap-3 font-sans text-[16px] leading-[26px] text-green-olive">
-                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-pill bg-beige-dark text-tomato">
+                <li key={key} className="flex items-center gap-3 font-sans text-[16px] leading-[26px] text-navy-soft">
+                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-pill bg-paper-dark text-navy">
                     <Icon className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
                   </span>
                   {t.booking[key]}
@@ -65,11 +65,11 @@ export default function ReserveCard({ workshop }: { workshop: Workshop }) {
             </Button>
           </>
         ) : (
-          <p className="mt-6 font-sans text-body text-green-olive">{t.booking.unavailableTitle}</p>
+          <p className="mt-6 font-sans text-body text-navy-soft">{t.booking.unavailableTitle}</p>
         )}
-        <p className="mt-5 text-center font-sans text-[14px] leading-[22px] text-green-olive">
+        <p className="mt-5 text-center font-sans text-[14px] leading-[22px] text-navy-soft">
           {t.booking.groupNote}
-          <Link to="/private-workshops" className="font-bold text-tomato hover:underline">
+          <Link to="/private-workshops" className="font-bold text-navy hover:underline">
             {t.booking.groupLink}
           </Link>
         </p>

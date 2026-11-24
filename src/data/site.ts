@@ -8,7 +8,7 @@ export interface NavLink {
 /** Primary navigation, labelled in the active language. */
 export const getNavLinks = (t: Translation): NavLink[] => [
   { label: t.nav.workshops, to: "/workshops" },
-  { label: t.nav.studio, to: "/about" },
+  { label: t.nav.places, to: "/places" },
   { label: t.nav.privateWorkshops, to: "/private-workshops" },
   { label: t.nav.gallery, to: "/gallery" },
   { label: t.nav.about, to: "/about" },
@@ -20,18 +20,12 @@ export const getLegalLinks = (t: Translation): NavLink[] => [
 ];
 
 export const site = {
-  name: "The Third Place",
-  tagline: "A creative workshop studio in Casablanca",
-  addressLines: ["Boulevard d'Anfa 12", "20050 Casablanca, Morocco"],
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Boulevard+d'Anfa+12+Casablanca",
+  name: "Kintessa",
+  tagline: "The third place · Casablanca",
   email: "mohammed.mad.dev@gmail.com",
   phoneDisplay: "+212 600 000 000",
   /** International number without "+" or spaces, used for wa.me links */
   whatsappNumber: "212600000000",
-  social: {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-  },
   googleReviews: {
     rating: "5.0",
     count: 86,

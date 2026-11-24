@@ -13,12 +13,12 @@ export default function NewsletterForm({ className = "" }: { className?: string 
   };
   return (
     <form onSubmit={submit} className={className}>
-      <div className="flex h-[48px] items-center rounded-pill bg-white p-[5px] pl-5">
+      <div className="flex h-[48px] items-center rounded-pill bg-white p-[5px] pl-5 transition focus-within:ring-2 focus-within:ring-sun/70">
         <label htmlFor="newsletter" className="sr-only">
           {t.footer.emailPlaceholder}
         </label>
-        <input id="newsletter" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.footer.emailPlaceholder} className="min-w-0 flex-1 bg-transparent font-sans text-[14px] text-green placeholder:text-green/50 focus:outline-none" />
-        <button type="submit" className="inline-flex h-[38px] shrink-0 items-center rounded-pill bg-tomato px-[19px] font-sans text-[16px] font-bold text-white transition hover:bg-tomato-hover">
+        <input id="newsletter" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.footer.emailPlaceholder} className="min-w-0 flex-1 bg-transparent font-sans text-[14px] text-navy placeholder:text-navy/50 focus:outline-none" />
+        <button type="submit" className="inline-flex h-[38px] shrink-0 items-center rounded-pill bg-navy px-[19px] font-sans text-[16px] font-bold text-white transition hover:bg-navy-hover">
           {t.footer.subscribe}
         </button>
       </div>

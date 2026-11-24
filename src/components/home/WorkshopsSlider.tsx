@@ -15,10 +15,10 @@ export default function WorkshopsSlider() {
         <div className="relative lg:pl-4">
           <div className="dotted-bg absolute -left-6 top-1/2 h-[104%] w-[84%] -translate-y-1/2 rounded-[6px] lg:-left-4" aria-hidden="true" />
           <div className="relative max-w-[400px] pt-6 pb-6">
-            <h2 id="home-workshops" className="font-sans text-h2 text-green">
+            <h2 id="home-workshops" className="font-sans text-h2 text-navy lg:max-w-[360px]">
               {t.home.workshopsTitle}
             </h2>
-            <p className="mt-4 font-sans text-body text-green-olive">{t.home.workshopsText}</p>
+            <p className="mt-4 font-sans text-body text-navy-soft">{t.home.workshopsText}</p>
             <div className="mt-5 flex flex-wrap gap-2 lg:flex-nowrap">
               <Button to="/workshops" variant="secondary" className="px-[14px]">
                 {t.common.openWorkshops}

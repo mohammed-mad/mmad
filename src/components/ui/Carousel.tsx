@@ -51,7 +51,7 @@ export default function Carousel({ children, ariaLabel, step = 444, className = 
   const scroll = (direction: 1 | -1) => trackRef.current?.scrollBy({ left: direction * step, behavior: "smooth" });
 
   const arrowClass =
-    "absolute top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-green-olive shadow-arrow transition duration-300 hover:bg-beige-dark disabled:opacity-0 lg:inline-flex";
+    "absolute top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy-soft shadow-arrow transition duration-300 hover:bg-paper-dark disabled:opacity-0 lg:inline-flex";
 
   return (
     <div className={["relative", className].join(" ")}>
@@ -71,7 +71,7 @@ export default function Carousel({ children, ariaLabel, step = 444, className = 
       {showDots && count > 1 && (
         <div className="mt-4 flex justify-center gap-[6px]" aria-hidden="true">
           {children.map((_, i) => (
-            <span key={i} className={["h-[6px] w-[6px] rounded-full transition", i === index ? "bg-green" : "bg-green/30"].join(" ")} />
+            <span key={i} className={["h-[6px] w-[6px] rounded-full transition", i === index ? "bg-navy" : "bg-navy/30"].join(" ")} />
           ))}
         </div>
       )}

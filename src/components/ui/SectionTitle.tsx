@@ -7,14 +7,15 @@ interface SectionTitleProps {
   className?: string;
   as?: "h1" | "h2" | "h3";
   align?: "left" | "center";
-  tone?: "green" | "white";
+  tone?: "navy" | "white";
   extra?: ReactNode;
+  id?: string;
 }
 
-export default function SectionTitle({ children, accent, className = "", as: Tag = "h2", align = "left", tone = "green", extra }: SectionTitleProps) {
+export default function SectionTitle({ children, accent, className = "", as: Tag = "h2", align = "left", tone = "navy", extra, id }: SectionTitleProps) {
   const text = accent && children.endsWith(accent) ? children.slice(0, -accent.length) : children;
   return (
-    <Tag className={["font-sans text-h2", tone === "green" ? "text-green" : "text-white", align === "center" ? "text-center" : "", className].join(" ")}>
+    <Tag id={id} className={["font-sans text-h2", tone === "navy" ? "text-navy" : "text-white", align === "center" ? "text-center" : "", className].join(" ")}>
       {text}
       {accent && children.endsWith(accent) && <span className="underline-accent">{accent}</span>}
       {extra}

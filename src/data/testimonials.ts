@@ -33,8 +33,8 @@ export const testimonialSources: TestimonialSource[] = [
     avatar: linaAvatar,
     when: { en: "3 weeks ago", fr: "il y a 3 semaines" },
     quote: {
-      en: "A perfect way to disconnect and be creative. Highly recommend The Third Place to anyone looking for a unique experience.",
-      fr: "Le moyen parfait de déconnecter et de créer. Je recommande vivement The Third Place à tous ceux qui cherchent une expérience unique.",
+      en: "A perfect way to disconnect and be creative. Highly recommend Kintessa to anyone looking for a unique experience.",
+      fr: "Le moyen parfait de déconnecter et de créer. Je recommande vivement Kintessa à tous ceux qui cherchent une expérience unique.",
     },
   },
   {

@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import Button from "@/components/ui/Button";
-import { site } from "@/data/site";
 import { useLanguage, useT } from "@/i18n/LanguageContext";
 
 export interface BookingSuccessState {
@@ -40,28 +39,28 @@ export default function BookingSuccess() {
 
   return (
     <section className="page-container pb-20 pt-[200px] text-center">
-      <h1 className="display text-[44px] leading-[1] text-green lg:text-[56px]">
+      <h1 className="display text-[44px] leading-[1] text-navy lg:text-[56px]">
         {state ? (isConfirmed ? t.booking.successTitle : t.booking.pendingTitle) : t.booking.successGenericTitle}
       </h1>
 
       {state ? (
         <div className="mt-6">
-          <p className="font-sans text-h3 text-green">{state.workshopTitle}</p>
+          <p className="font-sans text-h3 text-navy">{state.workshopTitle}</p>
           {startDate && (
-            <p className="mt-2 font-sans text-body text-green-olive">
+            <p className="mt-2 font-sans text-body text-navy-soft">
               {startDate.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long" })}
               {" · "}
               {startDate.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
               {endDate && ` – ${endDate.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}`}
             </p>
           )}
-          <p className="mt-2 font-sans text-body text-green-olive">
-            {site.name}, {site.addressLines.join(", ")}
+          <p className="mt-2 font-sans text-body text-navy-soft">
+            {t.booking.locationText}
           </p>
-          <p className="mt-4 font-sans text-body text-green-olive">{isConfirmed ? t.booking.successEmail : t.booking.pendingText}</p>
+          <p className="mt-4 font-sans text-body text-navy-soft">{isConfirmed ? t.booking.successEmail : t.booking.pendingText}</p>
         </div>
       ) : (
-        <p className="mt-6 font-sans text-body text-green-olive">{t.booking.successGeneric}</p>
+        <p className="mt-6 font-sans text-body text-navy-soft">{t.booking.successGeneric}</p>
       )}
 
       <Button to="/workshops" arrow className="mt-8">

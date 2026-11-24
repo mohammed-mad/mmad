@@ -2,7 +2,7 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 
-type Variant = "primary" | "secondary" | "secondary-light" | "yellow" | "white" | "green";
+type Variant = "primary" | "secondary" | "secondary-light" | "yellow" | "white" | "navy";
 type Size = "md" | "sm";
 
 interface BaseProps {
@@ -24,12 +24,12 @@ const base =
   "inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-pill font-sans font-bold transition duration-300 ease-out disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-tomato text-white hover:bg-tomato-hover hover:-translate-y-0.5",
-  secondary: "border-[1.5px] border-green text-green hover:bg-green hover:text-white",
-  "secondary-light": "border-[1.5px] border-white text-white hover:bg-white hover:text-green",
-  yellow: "bg-orange text-ink hover:bg-orange-light",
-  white: "bg-white text-green hover:bg-beige-dark",
-  green: "bg-green text-white hover:bg-green-olive",
+  primary: "bg-navy text-paper hover:bg-navy-hover hover:-translate-y-0.5",
+  secondary: "border-[1.5px] border-navy text-navy hover:bg-navy hover:text-white",
+  "secondary-light": "border-[1.5px] border-white text-white hover:bg-white hover:text-navy",
+  yellow: "bg-sun text-navy hover:bg-sun-light",
+  white: "bg-white text-navy hover:bg-paper-dark",
+  navy: "bg-navy text-white hover:bg-navy-soft",
 };
 
 const sizes: Record<Size, string> = {

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram } from "lucide-react";
 import Logo from "@/components/ui/Logo";
 import NewsletterForm from "@/components/ui/NewsletterForm";
-import { getLegalLinks, getNavLinks, site } from "@/data/site";
+import { getLegalLinks, getNavLinks } from "@/data/site";
 import { useT } from "@/i18n/LanguageContext";
 
 export default function Footer() {
@@ -11,12 +10,12 @@ export default function Footer() {
   const legalLinks = getLegalLinks(t);
 
   return (
-    <footer className="rough-edge-top bg-green text-white">
+    <footer className="rough-edge-top bg-navy text-white">
       <div className="bg-dots-light bg-dots">
         <div className="page-container pt-[96px]">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[285px_220px_218px_1fr] lg:gap-0">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[250px_200px_260px_1fr] lg:gap-0">
             <div>
-              <Logo tone="light" size={152} />
+              <Logo tone="light" size={190} />
             </div>
 
             <div>
@@ -24,7 +23,7 @@ export default function Footer() {
               <ul className="mt-1">
                 {[...navLinks, { label: t.nav.contact, to: "/contact" }].map((link) => (
                   <li key={link.label}>
-                    <Link to={link.to} className="block pb-2 font-sans text-body text-white transition hover:text-orange">
+                    <Link to={link.to} className="block pb-2 font-sans text-body text-white transition hover:text-sun">
                       {link.label}
                     </Link>
                   </li>
@@ -34,15 +33,12 @@ export default function Footer() {
 
             <div>
               <h3 className="font-sans text-label uppercase text-white">{t.footer.location}</h3>
-              <p className="mt-1 font-sans text-body text-white">
-                {site.addressLines.map((line) => (
+              <p className="mt-1 font-sans text-body text-white lg:pr-10">
+                {t.footer.locationLines.map((line) => (
                   <span key={line} className="block">
                     {line}
                   </span>
                 ))}
-                <a href={site.mapsUrl} target="_blank" rel="noreferrer" className="text-orange transition hover:text-orange-light">
-                  {t.footer.getDirections}
-                </a>
               </p>
             </div>
 
@@ -53,16 +49,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="mt-[92px] mb-10 flex flex-col border border-white/20 md:flex-row md:items-stretch md:justify-between">
-            <div className="flex">
-              <a href={site.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="inline-flex h-[62px] w-16 items-center justify-center border-r border-white/20 transition hover:bg-white/10">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href={site.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook" className="inline-flex h-[62px] w-16 items-center justify-center border-r border-white/20 transition hover:bg-white/10">
-                <Facebook className="h-5 w-5" />
-              </a>
-            </div>
-            <ul className="flex flex-wrap items-center gap-y-2 px-4 py-4 md:py-0">
+          <div className="mt-[92px] mb-10 flex border border-white/20 md:min-h-[62px] md:items-center md:justify-center">
+            <ul className="flex flex-wrap items-center justify-center gap-y-2 px-4 py-4">
               {legalLinks.map((link) => (
                 <li key={link.label}>
                   <Link to={link.to} className="px-4 font-sans text-tiny uppercase text-white/50 transition hover:text-white">

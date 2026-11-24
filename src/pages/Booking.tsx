@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import PageHeader from "@/components/ui/PageHeader";
 import BookingSummary from "@/components/booking/BookingSummary";
-import CalBooking, { type BookingResult } from "@/components/booking/CalBooking";
+import BookingForm from "@/components/booking/BookingForm";
+import type { CreatedBooking } from "@/lib/cal-booking";
 import { bookingConfig } from "@/config/booking";
 import { track } from "@/lib/analytics";
 import { useT } from "@/i18n/LanguageContext";
@@ -26,7 +27,7 @@ export default function Booking() {
   if (!workshop) {
     return (
       <section className="page-container pb-20 pt-[200px]">
-        <h1 className="display text-[44px] leading-[1] text-green lg:text-[56px]">{t.booking.notFoundTitle}</h1>
+        <h1 className="display text-[44px] leading-[1] text-navy lg:text-[56px]">{t.booking.notFoundTitle}</h1>
         <Button to="/workshops" arrow className="mt-8">
           {t.booking.backToWorkshops}
         </Button>
@@ -36,14 +37,13 @@ export default function Booking() {
 
   const bookable = workshop.active && bookingConfig.isConfigured;
 
-  const handleBookingSuccess = (result: BookingResult) => {
-    if (result.paymentRequired) return;
+  const handleBooked = (result: CreatedBooking) => {
     track("booking_completed", { workshopId: workshop.id, workshopSlug: workshop.slug, workshopName: workshop.title });
     const state: BookingSuccessState = {
       workshopSlug: workshop.slug,
       workshopTitle: workshop.title,
-      startTime: result.startTime,
-      endTime: result.endTime,
+      startTime: result.start,
+      endTime: result.end,
       uid: result.uid,
       status: result.status,
     };
@@ -59,14 +59,14 @@ export default function Booking() {
             <BookingSummary workshop={workshop} />
           </div>
           <div className="min-w-0">
-            <h2 className="font-sans text-h3 text-green">{t.booking.chooseDateTime}</h2>
-            <div className="mt-6">
+            <h2 className="sr-only">{t.booking.chooseDateTime}</h2>
+            <div>
               {bookable ? (
-                <CalBooking key={workshop.id} eventSlug={workshop.calEventSlug} workshopName={workshop.title} onBookingSuccess={handleBookingSuccess} />
+                <BookingForm key={workshop.id} eventSlug={workshop.calEventSlug} maxPeople={workshop.maxParticipants} onBooked={handleBooked} />
               ) : (
                 <div className="bg-white p-8 text-center shadow-float">
-                  <p className="font-sans text-h3 text-green">{t.booking.unavailableTitle}</p>
-                  <p className="mt-3 font-sans text-body text-green-olive">{t.booking.unavailableText}</p>
+                  <p className="font-sans text-h3 text-navy">{t.booking.unavailableTitle}</p>
+                  <p className="mt-3 font-sans text-body text-navy-soft">{t.booking.unavailableText}</p>
                   <Button to="/contact" variant="secondary" className="mt-6">
                     {t.booking.contactUs}
                   </Button>

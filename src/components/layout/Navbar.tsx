@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "@/components/ui/Logo";
@@ -7,7 +7,7 @@ import { getNavLinks } from "@/data/site";
 import { useT } from "@/i18n/LanguageContext";
 
 /** Pages that open with a dark photo hero get the white logo. */
-const darkHeroPattern = /^\/($|workshops|about|contact|private-workshops)/;
+const darkHeroPattern = /^\/($|workshops|places|about|contact|private-workshops)/;
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -18,31 +18,48 @@ export default function Navbar() {
 
   return (
     <div className="absolute inset-x-0 top-0 z-40">
-      {/* Logo hugs the left edge, the menu bar hugs the right edge, like the reference */}
-      <div className="flex items-start justify-between pl-4 pr-4 sm:pl-6 sm:pr-6 lg:pl-10 lg:pr-0">
-        <div className="pt-4">
-          <Logo tone={onDarkHero ? "light" : "dark"} size={112} className="lg:hidden" />
-          <Logo tone={onDarkHero ? "light" : "dark"} size={140} className="hidden lg:inline-block" />
+      {/* Desktop: logo left, links centred, Contact + language right; all transparent over the page */}
+      <div className="flex items-start justify-between px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 lg:px-10">
+        <div className="pt-4 lg:justify-self-start lg:pt-5">
+          <Logo tone={onDarkHero ? "light" : "dark"} size={120} className="lg:hidden" />
+          <Logo tone={onDarkHero ? "light" : "dark"} size={160} className="hidden lg:inline-block" />
         </div>
 
-        <nav aria-label="Primary" className="hidden items-stretch bg-white pl-2 lg:flex">
-          {navLinks.map((link, index) => (
-            <Fragment key={link.label}>
-              {index > 0 && <span aria-hidden="true" className="self-center h-[5px] w-[5px] rounded-full bg-green-olive/60" />}
-              <NavLink to={link.to} className={({ isActive }) => ["flex items-center px-[20px] py-4 font-sans text-[17px] leading-[28px] text-green transition hover:text-tomato xl:text-[17.6px]", isActive ? "text-tomato" : ""].join(" ")}>
-                {link.label}
-              </NavLink>
-            </Fragment>
+        {/* Links centred on the page */}
+        <nav aria-label="Primary" className={["hidden items-center gap-1 lg:flex xl:gap-3", onDarkHero ? "text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]" : "text-navy"].join(" ")}>
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.label}
+              to={link.to}
+              className={({ isActive }) =>
+                ["px-3 py-3 font-sans text-[16px] leading-[28px] transition xl:px-[14px] xl:text-[17px]", isActive ? (onDarkHero ? "text-sun" : "underline decoration-[1.5px] underline-offset-[6px]") : onDarkHero ? "hover:text-sun" : "hover:text-navy-soft hover:underline hover:decoration-[1.5px] hover:underline-offset-[6px]"].join(" ")
+              }
+            >
+              {link.label}
+            </NavLink>
           ))}
-          <NavLink to="/contact" className="ml-2 flex items-center bg-green px-4 py-4 font-sans text-[17px] leading-[28px] text-white transition hover:bg-tomato xl:text-[17.6px]">
+        </nav>
+
+        {/* Contact and language on the far right, opposite the logo */}
+        <div className={["hidden items-center gap-2 lg:flex lg:justify-self-end", onDarkHero ? "text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)]" : "text-navy"].join(" ")}>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              [
+                "rounded-pill border-[1.5px] px-5 py-[7px] font-sans text-[16px] leading-[24px] transition xl:text-[17px]",
+                onDarkHero ? "border-white/80 hover:border-sun hover:text-sun" : "border-navy hover:bg-navy hover:text-paper",
+                isActive ? (onDarkHero ? "border-sun text-sun" : "bg-navy text-paper") : "",
+              ].join(" ")
+            }
+          >
             {t.nav.contact}
           </NavLink>
-          <LanguageSwitcher variant="toggle" />
-        </nav>
+          <LanguageSwitcher variant="toggle" tone={onDarkHero ? "light" : "dark"} />
+        </div>
 
         <div className="mt-4 flex items-center gap-2 lg:hidden">
           <LanguageSwitcher variant="pill" />
-          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? t.nav.closeMenu : t.nav.openMenu} className="inline-flex h-12 w-12 items-center justify-center bg-green text-white">
+          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? t.nav.closeMenu : t.nav.openMenu} className="inline-flex h-12 w-12 items-center justify-center bg-navy text-white">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
@@ -51,7 +68,7 @@ export default function Navbar() {
       {open && (
         <nav id="mobile-nav" aria-label="Mobile" className="mx-4 mt-2 bg-white shadow-float sm:mx-6 lg:hidden">
           {[...navLinks, { label: t.nav.contact, to: "/contact" }].map((link) => (
-            <NavLink key={link.label} to={link.to} onClick={() => setOpen(false)} className="block border-b border-green/10 px-5 py-4 font-sans text-[17px] text-green last:border-0 hover:text-tomato">
+            <NavLink key={link.label} to={link.to} onClick={() => setOpen(false)} className="block border-b border-navy/10 px-5 py-4 font-sans text-[17px] text-navy last:border-0 hover:text-navy">
               {link.label}
             </NavLink>
           ))}
