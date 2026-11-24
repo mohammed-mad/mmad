@@ -1,0 +1,158 @@
+{
+  "cards/ceramic-painting.jpg": {
+    "hash": "1263c58996eee1f3d8bbe4a94fd55909100bc22e",
+    "output": "cards/ceramic-painting.jpg"
+  },
+  "cards/cyanotype.jpg": {
+    "hash": "810b6874d2156ba2216c46ae57eece221f9b62d8",
+    "output": "cards/cyanotype.jpg"
+  },
+  "cards/cyanotype1.jpg": {
+    "hash": "aa181f82a5bbdab679b41df954674915760591cb",
+    "output": "cards/cyanotype1.jpg"
+  },
+  "cards/kintsugi.jpg": {
+    "hash": "0bf8fdaa48eb359fe7ad5d0fb2723e8d5cfcb351",
+    "output": "cards/kintsugi.jpg"
+  },
+  "cards/kintsugi1.jpg": {
+    "hash": "bc1b1644ad3eaed5d685da42f2cbcb8d49bb813f",
+    "output": "cards/kintsugi1.jpg"
+  },
+  "cards/mosaic.jpg": {
+    "hash": "eaf004b20318074fda9a409586a672080ba713f4",
+    "output": "cards/mosaic.jpg"
+  },
+  "cards/mosaic1.jpg": {
+    "hash": "0d0b75b67fc8cc978f80dc612370296f5b3e0694",
+    "output": "cards/mosaic1.jpg"
+  },
+  "cards/open-studio.jpg": {
+    "hash": "4d65b896ac5c547f1385239d63ce98e869a70ac7",
+    "output": "cards/open-studio.jpg"
+  },
+  "cards/open-studio1.jpg": {
+    "hash": "9fd54bdf6c911efe825faa57179f741dafd7ef86",
+    "output": "cards/open-studio1.jpg"
+  },
+  "cards/pottery.jpg": {
+    "hash": "34eb859434382f06d7887c6b532f792804cf5bd1",
+    "output": "cards/pottery.jpg"
+  },
+  "cta/kintsugi-table.jpg": {
+    "hash": "44de687c789653896dcb523498de15d19cfa0ef4",
+    "output": "cta/kintsugi-table.jpg"
+  },
+  "gallery/gallery-1.jpg": {
+    "hash": "b1278edd80e878603dfa6c6efa84b4ea324e6ad0",
+    "output": "gallery/gallery-1.jpg"
+  },
+  "gallery/gallery-12.jpg": {
+    "hash": "2edde09b28571b60db34f28d557ca11f7372b90d",
+    "output": "gallery/gallery-12.jpg"
+  },
+  "gallery/gallery-2.jpg": {
+    "hash": "11e33831477cacfae0f4b835a88596dcab7abdde",
+    "output": "gallery/gallery-2.jpg"
+  },
+  "gallery/gallery-3.jpg": {
+    "hash": "991718873dc9b527a4bfca7d156eb6700f3d9469",
+    "output": "gallery/gallery-3.jpg"
+  },
+  "gallery/gallery-4.jpg": {
+    "hash": "0d0b75b67fc8cc978f80dc612370296f5b3e0694",
+    "output": "gallery/gallery-4.jpg"
+  },
+  "gallery/gallery-5.jpg": {
+    "hash": "5deb5a751a699fbb809eb0b3f55bfe227b753746",
+    "output": "gallery/gallery-5.jpg"
+  },
+  "hero/hero.jpg": {
+    "hash": "c76866b17c87b51708658eb0b9d78e1769988746",
+    "output": "hero/hero.jpg"
+  },
+  "hero/hero1.jpg": {
+    "hash": "3d8dfcc57a723f170679b6a949af02043fba9173",
+    "output": "hero/hero1.jpg"
+  },
+  "hero/hero2.jpg": {
+    "hash": "a33e9b1fdb72a9a458afe877036896df0b68be98",
+    "output": "hero/hero2.jpg"
+  },
+  "kintsugi/gloves-mending.jpg": {
+    "hash": "92cb937a58f47cae977386993b52a862f1f85ddb",
+    "output": "kintsugi/gloves-mending.jpg"
+  },
+  "kintsugi/gold-plates.jpg": {
+    "hash": "3106348054eafe328a9a0a3ae0fee2c7456993c7",
+    "output": "kintsugi/gold-plates.jpg"
+  },
+  "kintsugi/hands-teapot.jpg": {
+    "hash": "2600989fecbe45870937c5d3f0f956463a872f41",
+    "output": "kintsugi/hands-teapot.jpg"
+  },
+  "kintsugi/table-overhead.jpg": {
+    "hash": "f2d4f518f3d1cd9d9259f80f4f067ac07550640b",
+    "output": "kintsugi/table-overhead.jpg"
+  },
+  "mosaic/paper-mosaic.webp": {
+    "hash": "41d164775a0e19c5f1121d2d99ea33c4b29b1913",
+    "output": "mosaic/paper-mosaic.jpg"
+  },
+  "mosaic/tile-baskets.jpg": {
+    "hash": "b7570bc36726bfb39ca4d51e6c46edf9c410e45f",
+    "output": "mosaic/tile-baskets.jpg"
+  },
+  "mosaic/tiles-and-nippers.jpg": {
+    "hash": "3d5f5f28793e9a2cfbf608b3773b1a504a2091e1",
+    "output": "mosaic/tiles-and-nippers.jpg"
+  },
+  "people/maker.jpg": {
+    "hash": "c54a391fc86ef6981e31627fa2e9d2b32ec2bec1",
+    "output": "people/maker.jpg"
+  },
+  "people/maker1.jpg": {
+    "hash": "93f5c54e2f2fdbf08bf4b9d494790a0f79a609f5",
+    "output": "people/maker1.jpg"
+  },
+  "studio/studio-wide1.jpg": {
+    "hash": "9fd54bdf6c911efe825faa57179f741dafd7ef86",
+    "output": "studio/studio-wide1.jpg"
+  },
+  "studio/studio.jpg": {
+    "hash": "7c3f3b92733c0821cd4c6fefa7f73d02632b85ba",
+    "output": "studio/studio.jpg"
+  },
+  "studio/studio1.jpg": {
+    "hash": "9fd54bdf6c911efe825faa57179f741dafd7ef86",
+    "output": "studio/studio1.jpg"
+  },
+  "studio/Пленка делает плюс вайб нашей арт-практике 📷 #артпрактика #артпикник #артпрактикамосква #артпикникмосква #35mm #35mmfilm.jpg": {
+    "hash": "c76866b17c87b51708658eb0b9d78e1769988746",
+    "output": "studio/Пленка делает плюс вайб нашей арт-практике 📷 #артпрактика #артпикник #артпрактикамосква #артпикникмосква #35mm #35mmfilm.jpg"
+  },
+  "testimonials/lina.jpg": {
+    "hash": "cda4e307b26e50d7cb80590aae3e0f174a69ab90",
+    "output": "testimonials/lina.jpg"
+  },
+  "testimonials/sara.jpg": {
+    "hash": "026b56729885576cbef4f1d52cca8f934b9a14d9",
+    "output": "testimonials/sara.jpg"
+  },
+  "testimonials/yassine.jpg": {
+    "hash": "4e4bf99381306c253cf16179687e4095aa0d4b62",
+    "output": "testimonials/yassine.jpg"
+  },
+  "workshops/cyanotype.jpg": {
+    "hash": "11e33831477cacfae0f4b835a88596dcab7abdde",
+    "output": "workshops/cyanotype.jpg"
+  },
+  "workshops/kintsugi.jpg": {
+    "hash": "44de687c789653896dcb523498de15d19cfa0ef4",
+    "output": "workshops/kintsugi.jpg"
+  },
+  "workshops/mosaic.jpg": {
+    "hash": "19b2d4da4fcd1fc7feac05a8028fe69e04fe7274",
+    "output": "workshops/mosaic.jpg"
+  }
+}

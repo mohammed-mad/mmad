@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "images": "node scripts/optimize-images.mjs",
+    "predev": "node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/optimize-images.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
