@@ -1,5 +1,7 @@
 export type WorkshopCategory = "Kintsugi" | "Cyanotype" | "Mosaic Art";
 
+import type { CalEventDetails } from "@/lib/cal-events";
+
 export interface Workshop {
   id: string;
   slug: string;
@@ -19,7 +21,9 @@ export interface Workshop {
   whatYouWillDo: string[];
   includes: string[];
   duration: string;
-  maxParticipants: number;
+  maxParticipants: number | null;
+  event: CalEventDetails | null;
+  eventStatus: "loading" | "ready" | "unavailable";
   cardImage: Picture;
   heroImage: Picture;
   /** Photo next to the "What will you do?" list */
@@ -62,14 +66,14 @@ export interface FaqItem {
 }
 
 /** Text fields of a workshop that exist in every language. */
-export type WorkshopTextFields = "title" | "shortTitle" | "kicker" | "intro" | "summary" | "duration";
+export type WorkshopTextFields = "title" | "shortTitle" | "kicker" | "intro" | "summary";
 export type WorkshopListFields = "description" | "whatYouWillDo" | "includes";
 
 export type LocalizedString = Record<"en" | "fr", string>;
 export type LocalizedList = Record<"en" | "fr", string[]>;
 
 /** Workshop as authored: text in every language, resolved to `Workshop` for the active one. */
-export type WorkshopSource = Omit<Workshop, WorkshopTextFields | WorkshopListFields> &
+export type WorkshopSource = Omit<Workshop, WorkshopTextFields | WorkshopListFields | "duration" | "maxParticipants" | "event" | "eventStatus"> &
   Record<WorkshopTextFields, LocalizedString> &
   Record<WorkshopListFields, LocalizedList>;
 

@@ -1,18 +1,15 @@
 import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { Banknote, Check, Clock, Coffee, Gift, Package, Shirt, Sparkles, Users } from "lucide-react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { Check, Clock, Coffee, Gift, Package, Shirt, Sparkles, Users } from "lucide-react";
 import Button from "@/components/ui/Button";
 import BookingBackdrop from "@/components/booking/BookingBackdrop";
 import ReserveCard from "@/components/booking/ReserveCard";
 import InfoStats from "@/components/ui/InfoStats";
 import PageHero from "@/components/ui/PageHero";
 import Photo from "@/components/ui/Photo";
-import ScriptTitle from "@/components/ui/ScriptTitle";
 import { useT } from "@/i18n/LanguageContext";
 import { useWorkshop } from "@/i18n/useLocalizedData";
-import { useWorkshopPrice } from "@/lib/useWorkshopPrice";
 import { track } from "@/lib/analytics";
-import { images } from "@/data/images";
 
 const includeIcons = [Coffee, Package, Gift, Shirt, Sparkles];
 const label = "font-sans text-[10.5px] font-bold uppercase tracking-[0.14em] text-sun";
@@ -22,7 +19,6 @@ export default function WorkshopDetails() {
   const t = useT();
   const workshop = useWorkshop(slug);
   const workshopId = workshop?.id;
-  const price = useWorkshopPrice(workshop);
 
   useEffect(() => {
     if (!workshop) return;
@@ -48,15 +44,14 @@ export default function WorkshopDetails() {
             </Button>
           </div>
         )}
-        <div className="mt-8 w-full max-w-[660px]">
+        {(workshop.duration || workshop.maxParticipants !== null) && <div className="mt-8 w-full max-w-[660px]">
           <InfoStats
             stats={[
-              ...(price ? [{ label: d.price, value: price, hint: t.common.perPerson, Icon: Banknote }] : []),
-              { label: d.duration, value: workshop.duration, Icon: Clock },
-              { label: d.people, value: d.upTo(workshop.maxParticipants), Icon: Users },
+              ...(workshop.duration ? [{ label: d.duration, value: workshop.duration, Icon: Clock }] : []),
+              ...(workshop.maxParticipants !== null ? [{ label: d.people, value: d.upTo(workshop.maxParticipants), Icon: Users }] : []),
             ]}
           />
-        </div>
+        </div>}
       </PageHero>
 
       <section className="page-container py-14 lg:py-[80px]">
@@ -95,22 +90,14 @@ export default function WorkshopDetails() {
         <div className="page-container relative grid grid-cols-1 gap-10 lg:grid-cols-[1fr_640px] lg:gap-16">
           <div className="text-white">
             <dl className="space-y-6">
-              {price && (
-                <div>
-                  <dt className={label}>{d.price}</dt>
-                  <dd className="mt-1 font-sans text-body">
-                    {price} {t.common.perPerson}
-                  </dd>
-                </div>
-              )}
-              <div>
+              {workshop.duration && <div>
                 <dt className={label}>{d.duration}</dt>
                 <dd className="mt-1 font-sans text-body">{workshop.duration}</dd>
-              </div>
-              <div>
+              </div>}
+              {workshop.maxParticipants !== null && <div>
                 <dt className={label}>{d.people}</dt>
                 <dd className="mt-1 font-sans text-body">{d.upToPeople(workshop.maxParticipants)}</dd>
-              </div>
+              </div>}
               <div>
                 <dt className={label}>{d.included}</dt>
                 <dd className="mt-2">
@@ -133,21 +120,31 @@ export default function WorkshopDetails() {
         </div>
       </section>
 
-      <section className="page-container py-16 lg:py-[96px]" aria-labelledby="host-heading">
-        <div className="mx-auto grid max-w-[1000px] grid-cols-1 items-center gap-10 lg:grid-cols-[220px_1fr] lg:gap-16">
-          <Photo picture={images.host} alt={d.hostAlt} sizes="220px" className="mx-auto h-[220px] w-[220px] rounded-full object-cover" />
-          <div>
-            <ScriptTitle as="p" dashes={false}>
-              {d.hostKicker}
-            </ScriptTitle>
-            <h2 id="host-heading" className="font-sans text-h2 text-navy">
-              {d.hostName}
-            </h2>
-            {d.hostText && <p className="mt-4 font-sans text-[16px] leading-[26px] text-navy-soft">{d.hostText}</p>}
-            <Button to="/about" variant="secondary" size="sm" className="mt-6">
+      <section className="page-container py-14 sm:py-16 lg:py-20" aria-label={t.common.aboutKintessa}>
+        <div className="mx-auto flex max-w-[900px] items-center justify-center gap-10 lg:gap-20">
+          <svg viewBox="0 0 120 110" className="hidden h-[100px] w-[110px] shrink-0 -rotate-12 text-navy-soft md:block" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <ellipse cx="59" cy="43" rx="45" ry="12" />
+            <path d="M14 43c3 29 18 44 45 44s42-15 45-44M43 87l-3 7c12 5 26 5 38 0l-3-7" />
+            <path d="m66 33-8 16 11 9-9 13 5 15" strokeWidth="2.4" />
+            <path d="m94 13 3-7m7 17 8-2m-11-5 6-6" />
+          </svg>
+          <Link to="/about" className="group relative inline-flex shrink-0 items-center gap-3 py-5 font-display text-[22px] leading-tight text-navy outline-offset-8 focus-visible:outline focus-visible:outline-2 focus-visible:outline-navy min-[375px]:text-[27px] sm:gap-6 sm:text-[34px] lg:text-[42px]">
+            <span className="relative">
               {t.common.aboutKintessa}
-            </Button>
-          </div>
+              <svg viewBox="0 0 320 18" preserveAspectRatio="none" className="pointer-events-none absolute -bottom-5 left-0 h-[14px] w-full text-navy/50" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" aria-hidden="true">
+                <path d="M3 11c74-9 181-12 312-6M25 16c89-6 177-7 258-4" />
+              </svg>
+            </span>
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy text-paper transition-colors group-hover:bg-navy-hover sm:h-14 sm:w-14" aria-hidden="true">
+              <svg viewBox="0 0 24 24" className="h-5 w-5 transition-transform motion-safe:group-hover:translate-x-1 sm:h-6 sm:w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 12h16m-6-6 6 6-6 6" />
+              </svg>
+            </span>
+          </Link>
+          <svg viewBox="0 0 100 120" className="hidden h-[110px] w-[90px] shrink-0 rotate-12 text-navy-soft md:block" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M25 112Q50 69 65 12M36 92C10 84 12 66 16 57c17 5 26 17 20 35ZM47 70c24 3 36-9 37-24-21-2-35 7-37 24ZM56 46C36 39 36 22 41 13c16 7 22 20 15 33ZM65 14c4-9 12-13 22-12-1 12-9 19-22 20" />
+            <path d="m22 70 14 22m11-22 24-15M44 25l12 21" strokeWidth="1" />
+          </svg>
         </div>
       </section>
     </>

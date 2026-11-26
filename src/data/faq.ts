@@ -5,8 +5,8 @@ export const faqSources: FaqItemSource[] = [
     id: "f-1",
     question: { en: "What is the difference between an open and a private workshop?", fr: "Quelle est la différence entre un atelier ouvert et un atelier privé ?" },
     answer: {
-      en: "Open workshops are public Saturdays: ten seats, you book your own and meet the others there. Private workshops are for your group alone, on a date and in a place we agree together.",
-      fr: "Les ateliers ouverts sont des samedis publics : dix places, vous réservez la vôtre et rencontrez les autres sur place. Les ateliers privés sont réservés à votre groupe, à une date et dans un lieu que nous choisissons ensemble.",
+      en: "Open workshops are public sessions in small groups: you book your own and meet the others there. Private workshops are for your group alone, on a date and in a place we agree together.",
+      fr: "Les ateliers ouverts sont des séances publiques en petits groupes : vous réservez la vôtre et rencontrez les autres sur place. Les ateliers privés sont réservés à votre groupe, à une date et dans un lieu que nous choisissons ensemble.",
     },
   },
   {

@@ -35,7 +35,7 @@ export default function Booking() {
     );
   }
 
-  const bookable = workshop.active && bookingConfig.isConfigured;
+  const bookable = workshop.active && bookingConfig.isConfigured && workshop.eventStatus === "ready";
 
   const handleBooked = (result: CreatedBooking) => {
     track("booking_completed", { workshopId: workshop.id, workshopSlug: workshop.slug, workshopName: workshop.title });
@@ -46,6 +46,11 @@ export default function Booking() {
       endTime: result.end,
       uid: result.uid,
       status: result.status,
+      participantCount: result.participantCount,
+      totalPrice: result.totalPrice,
+      currency: result.currency,
+      guestRequests: result.guestRequests,
+      venue: result.venue,
     };
     navigate("/booking/success", { state });
   };
@@ -61,12 +66,13 @@ export default function Booking() {
           <div className="min-w-0">
             <h2 className="sr-only">{t.booking.chooseDateTime}</h2>
             <div>
-              {bookable ? (
-                <BookingForm key={workshop.id} eventSlug={workshop.calEventSlug} maxPeople={workshop.maxParticipants} onBooked={handleBooked} />
+              {bookable && workshop.event ? (
+                workshop.event.onlinePayment ? <div className="bg-white p-8 shadow-float"><p className="font-sans text-body text-navy">{t.booking.paymentCheckout}</p><Button href={`https://cal.com/${bookingConfig.calUsername}/${workshop.calEventSlug}`} arrow className="mt-6">{t.booking.bookCta}</Button></div> :
+                <BookingForm key={workshop.id} eventSlug={workshop.calEventSlug} event={workshop.event} onBooked={handleBooked} />
               ) : (
                 <div className="bg-white p-8 text-center shadow-float">
-                  <p className="font-sans text-h3 text-navy">{t.booking.unavailableTitle}</p>
-                  <p className="mt-3 font-sans text-body text-navy-soft">{t.booking.unavailableText}</p>
+                  <p className="font-sans text-h3 text-navy">{workshop.eventStatus === "loading" ? t.booking.loading : t.booking.unavailableTitle}</p>
+                  {workshop.eventStatus !== "loading" && <p className="mt-3 font-sans text-body text-navy-soft">{t.booking.unavailableText}</p>}
                   <Button to="/contact" variant="secondary" className="mt-6">
                     {t.booking.contactUs}
                   </Button>

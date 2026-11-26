@@ -37,11 +37,11 @@ export default function Places() {
       {/* Reviews stay hidden until there are real ones. */}
 
       <section className="grid grid-cols-1 lg:grid-cols-2" aria-labelledby="places-belief">
-        {/* One photo per craft: the portrait cyanotype runs tall on the left, kintsugi and mosaic stack on the right */}
+        {/* The portrait mosaic runs tall on the left; cyanotype and kintsugi stack on the right. */}
         <div className="grid h-[420px] grid-cols-2 grid-rows-2 gap-[3px] bg-paper sm:h-[520px] lg:h-[600px]">
-          <Photo picture={images.cyanotypePrint} alt={p.block3Alts[1]} sizes="(min-width: 1024px) 25vw, 50vw" className="row-span-2 h-full w-full object-cover object-[center_40%]" />
-          <Photo picture={images.kintsugiBowl} alt={p.block3Alts[0]} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover object-[35%_center]" />
-          <Photo picture={images.mosaicCat} alt={p.block3Alts[2]} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover object-[40%_center]" />
+          <Photo picture={images.placesMosaic} alt={p.block3Alts[2]} sizes="(min-width: 1024px) 25vw, 50vw" className="row-span-2 h-full w-full object-cover object-center" />
+          <Photo picture={images.placesCyanotype} alt={p.block3Alts[1]} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover object-center" />
+          <Photo picture={images.placesKintsugi} alt={p.block3Alts[0]} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover object-[center_45%]" />
         </div>
         <div className="flex items-center bg-paper-dark px-4 py-14 sm:px-8 lg:px-[80px] lg:py-20">
           <div className="max-w-[520px]">

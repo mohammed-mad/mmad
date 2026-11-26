@@ -66,21 +66,41 @@ site — there is no checkout and no backend.
 Without a configured username, every booking page shows "Booking currently
 unavailable" instead of the calendar.
 
-### Prices
+### Live booking information
 
-Prices are not stored in the site. Each workshop's price and currency are read
-from its Cal.com event type through Cal.com's public API
-(`src/lib/cal-events.ts`). There are two ways to set one, checked in this
-order:
+Cal.com is the source of truth for booking dates, available times, duration,
+location, prices, capacity, and remaining seats. The repository stores only
+workshop editorial content, photos, and the matching Cal.com event slug.
+No event date, address, price, duration, or capacity is used as a local fallback.
 
-1. **Payment settings**: connect a payment app to the event type and set its
-   price and currency. Customers then pay online when booking.
-2. **Description**: write the amount in dirhams anywhere in the event type's
-   description, for example `Price: 650 MAD` (`DH` also works). No payment app
-   is needed.
+Data is refreshed every 30 seconds while the page is visible, and when the
+visitor returns to the page. A page reload reads Cal.com again. Booking submits
+refresh event settings before creating a reservation. Missing or unavailable
+events show booking unavailable instead of retaining hard-coded information.
 
-Dirhams are shown as `650 MAD`. A workshop whose event has no price, or whose
-price cannot be loaded, is shown without a price.
+- **Dates and times:** configure Availability and the booking date range in Cal.com.
+  Cards show the next genuinely available session; the calendar displays live slots.
+- **Duration:** edit the Cal.com event duration.
+- **Venue:** edit the event's Location. The website uses the returned location value.
+- **Capacity:** enable Offer seats and set the capacity in Cal.com. Remaining seats
+  come from the slots API. Changing capacity does not require a website edit.
+- **Individual price:** payment settings take priority. Without online payments,
+  add a separate description line such as `Price: 350 MAD per person`.
+- **Duo offer:** add a separate description line such as
+  `Duo offer: 600 MAD for 2 people`. Remove that line to remove the offer. The
+  website calculates each pair at that amount and any unpaired person at the
+  individual price. Description prices support MAD/DH, EUR, USD, and GBP.
+- **Online payments:** when enabled in Cal.com, the website directs visitors to
+  the Cal.com booking page to complete checkout rather than reporting an unpaid
+  custom-form reservation as confirmed.
+
+The **Add a participant** control collects only additional guests' full names.
+Only the main participant's seat is reserved automatically using their email.
+Guest names, the main contact details and any estimated group price are saved
+in booking notes marked **ADDITIONAL PLACES REQUESTED — MANUAL CONFIRMATION
+REQUIRED**. The host must account for these places against live capacity and
+confirm availability and final pricing manually. The form and success page
+show the guests as pending; the website does not automatically charge a group.
 
 Never put API keys or webhook secrets in `VITE_*` variables — only the public
 Cal.com username is read from the environment (`src/config/booking.ts`).

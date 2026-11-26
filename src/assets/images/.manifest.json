@@ -80,7 +80,7 @@
     "output": "gallery/gallery-4.jpg"
   },
   "gallery/gallery-5.jpg": {
-    "hash": "5deb5a751a699fbb809eb0b3f55bfe227b753746",
+    "hash": "4d65b896ac5c547f1385239d63ce98e869a70ac7",
     "output": "gallery/gallery-5.jpg"
   },
   "hero/hero.jpg": {
@@ -94,6 +94,10 @@
   "hero/hero2.jpg": {
     "hash": "a33e9b1fdb72a9a458afe877036896df0b68be98",
     "output": "hero/hero2.jpg"
+  },
+  "journal/cyanotype-table.jpg": {
+    "hash": "7b2057204c1873baefd761835c6292986db6ed4f",
+    "output": "journal/cyanotype-table.jpg"
   },
   "kintsugi/gloves-mending.jpg": {
     "hash": "92cb937a58f47cae977386993b52a862f1f85ddb",
@@ -130,6 +134,18 @@
   "people/maker1.jpg": {
     "hash": "93f5c54e2f2fdbf08bf4b9d494790a0f79a609f5",
     "output": "people/maker1.jpg"
+  },
+  "places/cyanotype-prints.jpg": {
+    "hash": "2cca241b1a279830e3499ca777c72f9dfd932788",
+    "output": "places/cyanotype-prints.jpg"
+  },
+  "places/kintsugi-mending.jpg": {
+    "hash": "274fbe508e7014b04915ca2bc0845611e0c853d0",
+    "output": "places/kintsugi-mending.jpg"
+  },
+  "places/mosaic-lantern.jpg": {
+    "hash": "3e3ffedf09d85985717146a54dfa1e4aa8e318f2",
+    "output": "places/mosaic-lantern.jpg"
   },
   "studio/studio-wide1.jpg": {
     "hash": "9fd54bdf6c911efe825faa57179f741dafd7ef86",

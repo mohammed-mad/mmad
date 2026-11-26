@@ -1,6 +1,9 @@
 import { useLocation } from "react-router-dom";
 import Button from "@/components/ui/Button";
 import { useLanguage, useT } from "@/i18n/LanguageContext";
+import { useWorkshop } from "@/i18n/useLocalizedData";
+import { VENUE_TIME_ZONE } from "@/lib/cal-booking";
+import { formatPrice } from "@/lib/format";
 
 export interface BookingSuccessState {
   workshopSlug: string;
@@ -9,6 +12,11 @@ export interface BookingSuccessState {
   endTime?: string;
   uid?: string;
   status?: string;
+  participantCount?: number;
+  totalPrice?: number;
+  currency?: string;
+  guestRequests?: number;
+  venue?: string;
 }
 
 const isBookingSuccessState = (value: unknown): value is BookingSuccessState => {
@@ -19,6 +27,11 @@ const isBookingSuccessState = (value: unknown): value is BookingSuccessState => 
   if (candidate.endTime !== undefined && typeof candidate.endTime !== "string") return false;
   if (candidate.uid !== undefined && typeof candidate.uid !== "string") return false;
   if (candidate.status !== undefined && typeof candidate.status !== "string") return false;
+  if (candidate.participantCount !== undefined && (!Number.isInteger(candidate.participantCount) || (candidate.participantCount as number) < 1)) return false;
+  if (candidate.totalPrice !== undefined && (typeof candidate.totalPrice !== "number" || !Number.isFinite(candidate.totalPrice) || candidate.totalPrice < 0)) return false;
+  if (candidate.currency !== undefined && (typeof candidate.currency !== "string" || !/^[A-Z]{3}$/.test(candidate.currency))) return false;
+  if (candidate.guestRequests !== undefined && (!Number.isInteger(candidate.guestRequests) || (candidate.guestRequests as number) < 0)) return false;
+  if (candidate.venue !== undefined && typeof candidate.venue !== "string") return false;
   return true;
 };
 
@@ -30,17 +43,19 @@ export default function BookingSuccess() {
   const { locale } = useLanguage();
   const location = useLocation();
   const state = isBookingSuccessState(location.state) ? location.state : null;
+  const workshop = useWorkshop(state?.workshopSlug ?? "");
 
   const hasStart = state ? isValidDate(state.startTime) : false;
   const hasEnd = hasStart && state ? isValidDate(state.endTime) : false;
   const startDate = hasStart && state ? new Date(state.startTime as string) : null;
   const endDate = hasEnd && state ? new Date(state.endTime as string) : null;
   const isConfirmed = state ? state.status === undefined || state.status.toUpperCase() === "ACCEPTED" : false;
+  const hasGuestRequests = Boolean(state?.guestRequests);
 
   return (
     <section className="page-container pb-20 pt-[200px] text-center">
       <h1 className="display text-[44px] leading-[1] text-navy lg:text-[56px]">
-        {state ? (isConfirmed ? t.booking.successTitle : t.booking.pendingTitle) : t.booking.successGenericTitle}
+        {state ? (hasGuestRequests ? t.booking.guestRequestTitle : isConfirmed ? t.booking.successTitle : t.booking.pendingTitle) : t.booking.successGenericTitle}
       </h1>
 
       {state ? (
@@ -48,16 +63,18 @@ export default function BookingSuccess() {
           <p className="font-sans text-h3 text-navy">{state.workshopTitle}</p>
           {startDate && (
             <p className="mt-2 font-sans text-body text-navy-soft">
-              {startDate.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long" })}
+              {startDate.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", timeZone: VENUE_TIME_ZONE })}
               {" · "}
-              {startDate.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}
-              {endDate && ` – ${endDate.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" })}`}
+              {startDate.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", timeZone: VENUE_TIME_ZONE })}
+              {endDate && ` – ${endDate.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", timeZone: VENUE_TIME_ZONE })}`}
             </p>
           )}
           <p className="mt-2 font-sans text-body text-navy-soft">
-            {t.booking.locationText}
+            {state.venue ?? workshop?.event?.venue ?? t.booking.locationText}
           </p>
+          {state.participantCount && <p className="mt-2 font-sans text-body text-navy">{hasGuestRequests ? t.booking.form.requestedPeople(state.participantCount) : t.booking.form.people(state.participantCount)}{state.totalPrice !== undefined && state.currency ? ` · ${hasGuestRequests ? t.booking.form.estimatedTotal : t.booking.form.total}: ${formatPrice(state.totalPrice, state.currency)}` : ""}</p>}
           <p className="mt-4 font-sans text-body text-navy-soft">{isConfirmed ? t.booking.successEmail : t.booking.pendingText}</p>
+          {hasGuestRequests && <p className="mx-auto mt-4 max-w-[620px] font-sans text-body text-navy">{t.booking.guestRequestPending(state.guestRequests!)}</p>}
         </div>
       ) : (
         <p className="mt-6 font-sans text-body text-navy-soft">{t.booking.successGeneric}</p>

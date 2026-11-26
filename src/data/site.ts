@@ -22,10 +22,10 @@ export const getLegalLinks = (t: Translation): NavLink[] => [
 export const site = {
   name: "Kintessa",
   tagline: "The third place · Casablanca",
-  email: "mohammed.mad.dev@gmail.com",
-  phoneDisplay: "+212 600 000 000",
+  email: "kintessa96@gmail.com",
+  phoneDisplay: "+212 625 300 857",
   /** International number without "+" or spaces, used for wa.me links */
-  whatsappNumber: "212600000000",
+  whatsappNumber: "212625300857",
   googleReviews: {
     rating: "5.0",
     count: 86,

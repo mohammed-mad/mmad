@@ -4,7 +4,7 @@ import type { Workshop } from "@/types/workshop";
 import Button from "@/components/ui/Button";
 import ScriptTitle from "@/components/ui/ScriptTitle";
 import { useT } from "@/i18n/LanguageContext";
-import { useWorkshopPrice } from "@/lib/useWorkshopPrice";
+import WorkshopSessionDetails from "@/components/booking/WorkshopSessionDetails";
 
 const steps = [
   { Icon: CalendarDays, key: "stepDate" },
@@ -12,21 +12,9 @@ const steps = [
   { Icon: MapPin, key: "stepCome" },
 ] as const;
 
-/** Hand-drawn underline that sits under the price. */
-function Squiggle() {
-  return (
-    <svg className="mt-2 h-[10px] w-[132px] text-navy/40" viewBox="0 0 132 10" fill="none" aria-hidden="true">
-      <path d="M2 6c10-5 18 4 28 0s18-5 28-1 18 4 28 0 18-4 28-1 12 3 16 1" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 /** Booking call-to-action on the workshop page: price from Cal.com, what happens next, and the button. */
 export default function ReserveCard({ workshop }: { workshop: Workshop }) {
   const t = useT();
-  const price = useWorkshopPrice(workshop);
-  // "350 MAD" reads as amount + unit; symbol prices such as "€65" stay in one piece.
-  const [amount, unit] = price ? price.split(" ") : [];
 
   return (
     <div className="flex flex-col bg-white p-6 shadow-float lg:self-center lg:p-10">
@@ -37,16 +25,7 @@ export default function ReserveCard({ workshop }: { workshop: Workshop }) {
         <h2 id="booking-heading" className="font-sans text-h2 text-navy">
           {t.booking.title}
         </h2>
-        {price && (
-          <div className="mt-6">
-            <p className="flex items-baseline gap-2 text-navy">
-              <span className="display text-[44px] leading-none">{amount}</span>
-              {unit && <span className="font-sans text-[18px] font-bold leading-none tracking-[0.04em]">{unit}</span>}
-            </p>
-            <Squiggle />
-            <p className="mt-2 font-sans text-[11px] font-bold uppercase tracking-[0.14em] text-navy-soft">{t.common.perPerson}</p>
-          </div>
-        )}
+        <div className="mt-6"><WorkshopSessionDetails workshop={workshop} /></div>
         <hr className="mt-6 border-navy/10" />
         {workshop.active ? (
           <>
@@ -56,7 +35,7 @@ export default function ReserveCard({ workshop }: { workshop: Workshop }) {
                   <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-pill bg-paper-dark text-navy">
                     <Icon className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
                   </span>
-                  {t.booking[key]}
+                  {key === "stepCome" && workshop.event?.venue ? workshop.event.venue : t.booking[key]}
                 </li>
               ))}
             </ol>

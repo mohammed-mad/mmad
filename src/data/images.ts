@@ -13,6 +13,10 @@ import heroTable from "@/assets/images/hero/hero.jpg?pic";
 import studioPainting from "@/assets/images/studio/studio1.jpg?pic";
 import gardenTable from "@/assets/images/studio/studio.jpg?pic";
 import materialsTable from "@/assets/images/gallery/gallery-5.jpg?pic";
+import journalCyanotypeTable from "@/assets/images/journal/cyanotype-table.jpg?pic";
+import placesMosaic from "@/assets/images/places/mosaic-lantern.jpg?pic";
+import placesCyanotype from "@/assets/images/places/cyanotype-prints.jpg?pic";
+import placesKintsugi from "@/assets/images/places/kintsugi-mending.jpg?pic";
 import paintingCloseUp from "@/assets/images/gallery/gallery-1.jpg?pic";
 import cyanotypePrint from "@/assets/images/gallery/gallery-2.jpg?pic";
 import mosaicCat from "@/assets/images/gallery/gallery-4.jpg?pic";
@@ -45,6 +49,10 @@ export const images = {
   studioPainting,
   gardenTable,
   materialsTable,
+  journalCyanotypeTable,
+  placesMosaic,
+  placesCyanotype,
+  placesKintsugi,
   paintingCloseUp,
   cyanotypePrint,
   mosaicCat,

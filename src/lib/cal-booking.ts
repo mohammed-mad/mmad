@@ -19,7 +19,7 @@ export type SlotsByDay = Record<string, string[]>;
 const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null;
 
 /** How long free dates are reused before asking Cal.com again. */
-const SLOTS_CACHE_MS = 2 * 60 * 1000;
+const SLOTS_CACHE_MS = 30 * 1000;
 const slotsCache = new Map<string, { at: number; request: Promise<SlotsByDay> }>();
 
 /** Forget cached free dates, e.g. after a booking failed because a slot was just taken. */
@@ -27,10 +27,10 @@ export const clearSlotsCache = () => slotsCache.clear();
 
 /**
  * Available start times for an event between two days (inclusive). Results are
- * reused for a couple of minutes, so revisiting a month or a booking page is instant.
+ * reused briefly to share requests while keeping availability fresh.
  */
 export function fetchSlots(eventSlug: string, startDay: string, endDay: string): Promise<SlotsByDay> {
-  const key = `${eventSlug}|${startDay}|${endDay}`;
+  const key = `${bookingConfig.calUsername}|${eventSlug}|${startDay}|${endDay}`;
   const cached = slotsCache.get(key);
   if (cached && Date.now() - cached.at < SLOTS_CACHE_MS) return cached.request;
   const request = requestSlots(eventSlug, startDay, endDay);
@@ -48,6 +48,7 @@ async function requestSlots(eventSlug: string, startDay: string, endDay: string)
     timeZone: VENUE_TIME_ZONE,
   });
   const response = await fetch(`${bookingConfig.calApiUrl}/slots?${params.toString()}`, {
+    cache: "no-store",
     headers: { "cal-api-version": SLOTS_API_VERSION },
   });
   if (!response.ok) throw new Error(`slots ${response.status}`);
@@ -56,7 +57,7 @@ async function requestSlots(eventSlug: string, startDay: string, endDay: string)
   const result: SlotsByDay = {};
   for (const [day, slots] of Object.entries(data)) {
     if (!Array.isArray(slots)) continue;
-    const starts = slots.map((slot) => (isRecord(slot) && typeof slot.start === "string" ? slot.start : null)).filter((s): s is string => Boolean(s));
+    const starts = slots.map((slot) => (isRecord(slot) && typeof slot.start === "string" && !(typeof slot.seatsRemaining === "number" && slot.seatsRemaining <= 0) ? slot.start : null)).filter((s): s is string => Boolean(s));
     if (starts.length) result[day] = starts;
   }
   return result;
@@ -69,10 +70,11 @@ export interface BookingRequest {
   email: string;
   /** International format, e.g. "+212612345678" */
   phone: string;
-  /** Full names of the people coming along (no emails needed) */
+  /** Names-only requests for additional places; the host confirms these manually. */
   guests: string[];
   notes: string;
   language: "en" | "fr";
+  locationType?: "address" | "attendeePhone";
 }
 
 export interface CreatedBooking {
@@ -80,17 +82,22 @@ export interface CreatedBooking {
   start?: string;
   end?: string;
   status?: string;
+  participantCount?: number;
+  totalPrice?: number;
+  currency?: string;
+  guestRequests?: number;
+  venue?: string;
 }
 
 /** Thrown with Cal.com's own message so the form can explain what went wrong. */
 export class BookingFailedError extends Error {}
 
 /**
- * Books the slot. Guests are sent by name inside the booking notes, because
- * Cal.com's own "guests" field only accepts e-mail addresses.
+ * Reserves the main participant's seat. Additional guests are requests in the
+ * booking notes, not Cal.com attendees or automatically reserved seats.
  */
 export async function createBooking(request: BookingRequest): Promise<CreatedBooking> {
-  const guestLine = request.guests.length ? `Guests (${request.guests.length}): ${request.guests.join(", ")}` : "";
+  const guestLine = request.guests.length ? `ADDITIONAL PLACES REQUESTED — MANUAL CONFIRMATION REQUIRED\nGuest names (${request.guests.length}): ${request.guests.map((name) => name.trim()).join(", ")}\nThese guests do not have reserved seats yet. Please contact ${request.name.trim()} at ${request.email.trim()} or ${request.phone} to confirm availability and the final group price.` : "";
   const notes = [guestLine, request.notes.trim()].filter(Boolean).join("\n\n");
 
   const response = await fetch(`${bookingConfig.calApiUrl}/bookings`, {
@@ -107,8 +114,7 @@ export async function createBooking(request: BookingRequest): Promise<CreatedBoo
         timeZone: VENUE_TIME_ZONE,
         language: request.language,
       },
-      // The event asks for the attendee's phone as its location.
-      location: { type: "attendeePhone", phone: request.phone },
+      ...(request.locationType ? { location: request.locationType === "address" ? { type: "address" } : { type: "attendeePhone", phone: request.phone } } : {}),
       ...(notes ? { bookingFieldsResponses: { notes } } : {}),
     }),
   });
@@ -119,6 +125,7 @@ export async function createBooking(request: BookingRequest): Promise<CreatedBoo
     throw new BookingFailedError(typeof error?.message === "string" ? error.message : `booking ${response.status}`);
   }
   const data = isRecord(body) && isRecord(body.data) ? body.data : {};
+  if (typeof data.uid !== "string" || !data.uid) throw new BookingFailedError("Could not verify this reservation. Please contact us before trying again.");
   const text = (key: string) => (typeof data[key] === "string" ? (data[key] as string) : undefined);
-  return { uid: text("uid"), start: text("start"), end: text("end"), status: text("status") };
+  return { uid: text("uid"), start: text("start"), end: text("end"), status: text("status"), participantCount: 1 + request.guests.length, guestRequests: request.guests.length };
 }

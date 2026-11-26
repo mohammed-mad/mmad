@@ -42,8 +42,6 @@ export const workshopSources: WorkshopSource[] = [
       en: [welcome.en, "All materials and gold", "A ceramic piece, if you don’t bring your own", apron.en, "A short care guide"],
       fr: [welcome.fr, "Tout le matériel et l’or", "Une pièce de céramique, si vous n’apportez pas la vôtre", apron.fr, "Un petit guide d’entretien"],
     },
-    duration: { en: "approx. 2.5 hours", fr: "env. 2 h 30" },
-    maxParticipants: 10,
     // The card (home page and booking summary) keeps its photo; the workshop page uses the new set.
     cardImage: images.kintsugiHands,
     heroImage: images.kintsugiGoldPlates,
@@ -85,8 +83,6 @@ export const workshopSources: WorkshopSource[] = [
       en: [welcome.en, "Paper or fabric, and all materials", apron.en, "Tips for drying and framing"],
       fr: [welcome.fr, "Papier ou tissu, et tout le matériel", apron.fr, "Des conseils pour le séchage et l’encadrement"],
     },
-    duration: { en: "approx. 2 hours", fr: "env. 2 heures" },
-    maxParticipants: 10,
     // The card (home page and booking summary) keeps its photo; the workshop page uses the new set.
     cardImage: images.cyanotypeHands,
     heroImage: images.cyanotypeRinsing,
@@ -128,8 +124,6 @@ export const workshopSources: WorkshopSource[] = [
       en: [welcome.en, "All materials and tools", apron.en, "Tips for looking after your piece"],
       fr: [welcome.fr, "Tout le matériel et les outils", apron.fr, "Des conseils pour entretenir votre pièce"],
     },
-    duration: { en: "approx. 2.5 hours", fr: "env. 2 h 30" },
-    maxParticipants: 10,
     // The card (home page and booking summary) keeps its photo; the workshop page uses the new set.
     cardImage: images.mosaicTiles,
     heroImage: images.mosaicTilesNippers,
@@ -148,7 +142,10 @@ export const localizeWorkshop = (source: WorkshopSource, lang: Lang): Workshop =
   kicker: source.kicker[lang],
   intro: source.intro[lang],
   summary: source.summary[lang],
-  duration: source.duration[lang],
+  duration: "",
+  maxParticipants: null,
+  event: null,
+  eventStatus: "loading",
   description: source.description[lang],
   whatYouWillDo: source.whatYouWillDo[lang],
   includes: source.includes[lang],

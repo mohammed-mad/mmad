@@ -21,8 +21,8 @@ export default function Navbar() {
       {/* Desktop: logo left, links centred, Contact + language right; all transparent over the page */}
       <div className="flex items-start justify-between px-4 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 lg:px-10">
         <div className="pt-4 lg:justify-self-start lg:pt-5">
-          <Logo tone={onDarkHero ? "light" : "dark"} size={120} className="lg:hidden" />
-          <Logo tone={onDarkHero ? "light" : "dark"} size={160} className="hidden lg:inline-block" />
+          <Logo tone={onDarkHero ? "light" : "dark"} size={108} className="lg:hidden" />
+          <Logo tone={onDarkHero ? "light" : "dark"} size={144} className="hidden lg:inline-block" />
         </div>
 
         {/* Links centred on the page */}
